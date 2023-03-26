@@ -10,6 +10,7 @@ function App() {
      <Star />
      <Star />
      <Star />
+     <Text />
     </div>
   );
 }
@@ -19,4 +20,9 @@ export default App;
 function Star (){
   debugger
   return <div>*</div>
+}
+
+//add fragment
+function Text (){
+  return <>usually text</>; //<-----fragment
 }
