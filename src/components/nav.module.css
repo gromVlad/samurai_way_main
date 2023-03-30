@@ -1,0 +1,6 @@
+.nav {
+  grid-area: nav;
+  margin: 20px;
+  margin: 0 auto;
+  font-size: 24px;
+}

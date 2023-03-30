@@ -12,32 +12,8 @@
   grid-gap: 10px;
   
 }
-.header {
-  grid-area:header;
-}
-
-.header img{
-  width: 80px;
-}
 
 
-.nav {
-  grid-area: nav;
-  margin: 20px;
-  margin: 0 auto;
-  font-size: 24px;
-}
-.content {
-  grid-area: content;
-}
 
-.content  img{
-  width: 90%;
-  height: 300px;
-  border-radius: 20px;
-}
 
-.ava img{
-  width: 150px;
-  height: 150px;
-}
+
