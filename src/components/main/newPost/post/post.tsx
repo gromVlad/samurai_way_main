@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./post.module.css";
 
-export function Post() {
+export function Post(props:any) {
   return (
     <div>
       <div className={s.img}>
@@ -10,6 +10,7 @@ export function Post() {
           alt="ava"
         />
       </div>
+      {props.message}
       <div>like</div>
       <div>Dislike</div>
     </div>

@@ -10,7 +10,8 @@ export function NewPost() {
        <div>
         <button>Click</button>
        </div>
-          <Post />
+          <Post message="hello world"/>
+          <Post message="What your name?"/>
       </div>
   );
 }
