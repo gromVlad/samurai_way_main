@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./header.module.css";
-console.log(s);
+console.log(s);//header :"header_header__Xrmhv"
 
 
 export function HeaderAPP() {
@@ -13,3 +13,5 @@ export function HeaderAPP() {
     </header>
   );
 }
+
+//also print with two and more class --> className = { "${s.header} ${s.nextClass}"}

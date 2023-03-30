@@ -1,0 +1,16 @@
+import React from "react";
+import s from "./newPost.module.css";
+import { Post } from "./post/post";
+
+
+export function NewPost() {
+  return (
+    <div >
+       <textarea ></textarea>
+       <div>
+        <button>Click</button>
+       </div>
+          <Post />
+      </div>
+  );
+}

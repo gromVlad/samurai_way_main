@@ -1,9 +1,9 @@
 
 import React from "react";
 import "./App.css";
-import { HeaderAPP } from "./components/header";
-import { MainAPP } from "./components/main";
-import { NavigationAPP } from "./components/nav";
+import { HeaderAPP } from "./components/header/header";
+import { MainAPP } from "./components/main/main";
+import { NavigationAPP } from "./components/nav/nav";
 
 function App() {
   return (
