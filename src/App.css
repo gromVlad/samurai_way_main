@@ -13,7 +13,9 @@
   
 }
 
-
+.content {
+  grid-area: content;
+}
 
 
 
