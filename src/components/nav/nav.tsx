@@ -1,25 +1,31 @@
 import React from "react";
 import s from "./nav.module.css";
+import { NavLink } from "react-router-dom";
 
 export function NavigationAPP() {
   return (
     <nav className={s.nav}>
       <div>
         {/* add href (path) */}
-        <a href="/prof">Profile</a>
+        <NavLink to="/prof" activeClassName={s.active}>
+          Profile
+        </NavLink>
       </div>
       <div>
         {/* add href (path) */}
-        <a href="/dial">Message</a>
+        <NavLink to="/dial" activeClassName={s.active}>
+          Message
+        </NavLink>
       </div>
       <div>
-        <a href="">News</a>
+        <NavLink to="/news" activeClassName={s.active}>
+          News
+        </NavLink>
       </div>
       <div>
-        <a href="">Music</a>
-      </div>
-      <div>
-        <a href="">Music</a>
+        <NavLink to="/music" activeClassName={s.active}>
+          Music
+        </NavLink>
       </div>
     </nav>
   );

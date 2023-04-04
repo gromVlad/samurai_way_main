@@ -7,6 +7,8 @@ import { NavigationAPP } from "./components/nav/nav";
 import { Dialogs } from "./components/dialogs/dialogs";
 //includes BrowserRouter, Route
 import { BrowserRouter, Route } from "react-router-dom";
+import { Music } from "./components/music/music";
+import { News } from "./components/news/news";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <div className="content">
           <Route path="/prof" component={MainAPP} />
           <Route path="/dial" component={Dialogs} />
+          <Route path="/music" component={Music} />
+          <Route path="/news" component={News} />
         </div>
       </div>
     </BrowserRouter>
