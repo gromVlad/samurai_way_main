@@ -5,7 +5,7 @@ import { Post } from "./post/post";
 
 export function NewPost() {
   return (
-    <div >
+    <div className={s.block}>
        <textarea ></textarea>
        <div>
         <button>Click</button>
