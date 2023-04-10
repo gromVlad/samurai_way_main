@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { FC } from "react";
 import "./App.css";
 import { HeaderAPP } from "./components/header/header";
 import { MainAPP } from "./components/main/main";
@@ -10,19 +9,42 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { Music } from "./components/music/music";
 import { News } from "./components/news/news";
 
-function App() {
+export type namesType = {
+  name:string,
+  id:number
+}
+
+export type dataMesAndLikeType ={
+  mes:string,
+  like:number
+}
+export type MessageType ={
+  mes:string
+}
+
+type AppType = {
+  names: Array<namesType>;
+  messages: Array<MessageType>;
+  dataMesAndLike: Array<dataMesAndLikeType>;
+};
+
+
+const App: React.FC<AppType> = (props) => {
+  let { names, messages, dataMesAndLike } = props;
+
+  let varibalsMainAPP = () => <MainAPP dataMesAndLike = {dataMesAndLike} />;
+  let varibalsDialogs = () => <Dialogs names={names} messages={messages} />;
+
   return (
     <BrowserRouter>
       <div className="App">
         <HeaderAPP />
-        {/* <MainAPP /> */}
         <NavigationAPP />
-        {/* includes route in chois content on href(path) */}
         <div className="content">
-          <Route path="/prof" component={MainAPP} />
-          <Route path="/dial" component={Dialogs} />
-          <Route path="/music" component={Music} />
-          <Route path="/news" component={News} />
+          <Route path="/prof" render = {varibalsMainAPP} />
+          <Route path="/dial" render = {varibalsDialogs} />
+          <Route path="/music/*" component={Music} />
+          <Route path="/news/*" component={News} />
         </div>
       </div>
     </BrowserRouter>

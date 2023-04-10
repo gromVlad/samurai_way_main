@@ -1,21 +1,16 @@
 import React from "react";
 import s from "./newPost.module.css";
 import { Post } from "./post/post";
+import { dataMesAndLikeType } from "../../../App";
+
+type NewPostType = {
+  dataMesAndLike: Array<dataMesAndLikeType>
+};
 
 
-export function NewPost() {
-  const dataMesAndLike = [
-    {
-      mes: "hello world",
-      like: 23,
-    },
-    {
-      mes: "What your name?",
-      like: 15,
-    },
-  ];
+export function NewPost(props: NewPostType) {
 
-  const arrdataMesAndLike = dataMesAndLike.map((el) => (
+  const arrdataMesAndLike = props.dataMesAndLike.map((el) => (
     <Post message={el.mes} like={el.like} />
   ));
 
@@ -25,7 +20,7 @@ export function NewPost() {
       <div>
         <button>Click</button>
       </div>
-     {arrdataMesAndLike}
+      {arrdataMesAndLike}
     </div>
   );
 }
