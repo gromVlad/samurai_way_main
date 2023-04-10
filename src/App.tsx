@@ -26,11 +26,12 @@ type AppType = {
   names: Array<namesType>;
   messages: Array<MessageType>;
   dataMesAndLike: Array<dataMesAndLikeType>;
+  sidebar:Array<string>
 };
 
 
 const App: React.FC<AppType> = (props) => {
-  let { names, messages, dataMesAndLike } = props;
+  let { names, messages, dataMesAndLike, sidebar } = props;
 
   let varibalsMainAPP = () => <MainAPP dataMesAndLike = {dataMesAndLike} />;
   let varibalsDialogs = () => <Dialogs names={names} messages={messages} />;
@@ -39,10 +40,10 @@ const App: React.FC<AppType> = (props) => {
     <BrowserRouter>
       <div className="App">
         <HeaderAPP />
-        <NavigationAPP />
+        <NavigationAPP sidebar = {sidebar} />
         <div className="content">
-          <Route path="/prof" render = {varibalsMainAPP} />
-          <Route path="/dial" render = {varibalsDialogs} />
+          <Route path="/prof" render={varibalsMainAPP} />
+          <Route path="/dial" render={varibalsDialogs} />
           <Route path="/music/*" component={Music} />
           <Route path="/news/*" component={News} />
         </div>

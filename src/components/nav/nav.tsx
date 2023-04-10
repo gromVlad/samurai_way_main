@@ -2,7 +2,15 @@ import React from "react";
 import s from "./nav.module.css";
 import { NavLink } from "react-router-dom";
 
-export function NavigationAPP() {
+
+type NavigationAPPType = {
+  sidebar: Array<string>;
+};
+
+export function NavigationAPP(props: NavigationAPPType) {
+
+  const friends = props.sidebar.map(el => <p>{el} </p>)
+
   return (
     <nav className={s.nav}>
       <div>
@@ -26,6 +34,10 @@ export function NavigationAPP() {
         <NavLink to="/music" activeClassName={s.active}>
           Music
         </NavLink>
+        <div>
+          <h3>Friends</h3>
+          {friends}
+        </div>
       </div>
     </nav>
   );
