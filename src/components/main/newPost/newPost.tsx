@@ -15,14 +15,17 @@ export function NewPost() {
     },
   ];
 
+  const arrdataMesAndLike = dataMesAndLike.map((el) => (
+    <Post message={el.mes} like={el.like} />
+  ));
+
   return (
     <div className={s.block}>
       <textarea></textarea>
       <div>
         <button>Click</button>
       </div>
-      <Post message={dataMesAndLike[0].mes} like={dataMesAndLike[0].like} />
-      <Post message={dataMesAndLike[1].mes} like={dataMesAndLike[1].like} />
+     {arrdataMesAndLike}
     </div>
   );
 }

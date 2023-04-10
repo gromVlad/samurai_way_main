@@ -13,6 +13,10 @@ export function Dialogs() {
     { name: "Jack", id: 5 },
   ];
 
+  const arrNames = names.map((el) => (
+    <Users name={el.name} id={el.id} />
+  ));
+
   const messages = [
     { mes: "Hello my name is Vlad" },
     { mes: "What.." },
@@ -21,23 +25,16 @@ export function Dialogs() {
     { mes: "my names.." },
   ];
 
+   const arrMessages = messages.map((el) => <Message mes={el.mes} />);
+
   return (
     <main>
       <div className={s.content}>
         <div className={s.content__users}>
-          <Users name={names[0].name} id={names[0].id} />
-          <Users name={names[1].name} id={names[1].id} />
-          <Users name={names[2].name} id={names[2].id} />
-          <Users name={names[3].name} id={names[3].id} />
-          <Users name={names[4].name} id={names[4].id} />
-          
+          {arrNames}
         </div>
         <div className={s.content__messages}>
-          <Message mes={messages[0].mes} />
-          <Message mes={messages[1].mes} />
-          <Message mes={messages[2].mes} />
-          <Message mes={messages[3].mes} />
-          <Message mes={messages[4].mes} />
+          {arrMessages}
         </div>
       </div>
     </main>
