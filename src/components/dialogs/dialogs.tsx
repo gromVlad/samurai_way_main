@@ -4,22 +4,40 @@ import { NavLink } from "react-router-dom";
 
 
 export function Dialogs() {
+
+  const names = [
+    { name: "Vlad", id: 1 },
+    { name: "Alex", id: 2 },
+    { name: "Andor", id: 3 },
+    { name: "Carl", id: 4 },
+    { name: "Jack", id: 5 },
+  ];
+
+  const messages = [
+    { mes: "Hello my name is Vlad" },
+    { mes: "What.." },
+    { mes: "Hello" },
+    { mes: "Hello my name is Vlad" },
+    { mes: "my names.." },
+  ];
+
   return (
     <main>
       <div className={s.content}>
         <div className={s.content__users}>
-          <Users name={"Vlad"} id={1} />
-          <Users name={"Alex"} id={2} />
-          <Users name={"Andor"} id={3} />
-          <Users name={"Carl"} id={4} />
-          <Users name={"Jack"} id={5} />
+          <Users name={names[0].name} id={names[0].id} />
+          <Users name={names[1].name} id={names[1].id} />
+          <Users name={names[2].name} id={names[2].id} />
+          <Users name={names[3].name} id={names[3].id} />
+          <Users name={names[4].name} id={names[4].id} />
+          
         </div>
         <div className={s.content__messages}>
-          <Message mes={"Hello my name is Vlad"} />
-          <Message mes={"What.."} />
-          <Message mes={"Hello"} />
-          <Message mes={"Hello my name is Vlad"} />
-          <Message mes={"my names.."} />
+          <Message mes={messages[0].mes} />
+          <Message mes={messages[1].mes} />
+          <Message mes={messages[2].mes} />
+          <Message mes={messages[3].mes} />
+          <Message mes={messages[4].mes} />
         </div>
       </div>
     </main>

@@ -11,7 +11,7 @@ export function Post(props:any) {
         />
       </div>
       {props.message}
-      <div>like</div>
+      <div>{props.like}</div>
       <div>Dislike</div>
     </div>
   );
