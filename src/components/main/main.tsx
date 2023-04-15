@@ -6,14 +6,15 @@ import { dataMesAndLikeType } from "../../App";
 
 
 type MainAPPType = {
-  dataMesAndLike: Array<dataMesAndLikeType>
+  dataMesAndLike: Array<dataMesAndLikeType>;
+  funAddPost: (a: string) => void;
 };
 
 export function MainAPP(props: MainAPPType) {
   return (
     <main className={s.content}>
       <Headmain />
-      <NewPost dataMesAndLike= {props.dataMesAndLike} />
+      <NewPost dataMesAndLike={props.dataMesAndLike} funAddPost={props.funAddPost} />
     </main>
   );
 }

@@ -1,3 +1,4 @@
+import { rerender } from "./render"
 
 export const globalData = {
   names:[
@@ -26,4 +27,14 @@ export const globalData = {
     }
   ],
   sidebar:['alex','kate',"andor","han colo"]
+}
+
+//create global function
+export const newAddPost = (mesPost) => {
+  const newPost = {
+    mes:mesPost,
+    like:0
+  }
+  globalData.dataMesAndLike.push(newPost)
+  rerender(globalData)
 }

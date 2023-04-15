@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import s from "./dialogs.module.css";
 import { NavLink } from "react-router-dom";
 import { Message } from "./message/message";
@@ -17,6 +17,8 @@ export function Dialogs(props: DialogsType) {
   const arrNames = props.names.map((el) => <Users name={el.name} id={el.id} />);
 
   const arrMessages = props.messages.map((el) => <Message mes={el.mes} />);
+
+  
 
   return (
     <main>

@@ -25,15 +25,18 @@ export type MessageType ={
 type AppType = {
   names: Array<namesType>;
   messages: Array<MessageType>;
-  dataMesAndLike: Array<dataMesAndLikeType>;
-  sidebar:Array<string>
+  dataMesAndLike: dataMesAndLikeType[];
+  sidebar: Array<string>;
+  funAddPost: (a:string) => void;
 };
 
 
 const App: React.FC<AppType> = (props) => {
-  let { names, messages, dataMesAndLike, sidebar } = props;
+  let { names, messages, dataMesAndLike, sidebar, funAddPost } = props;
 
-  let varibalsMainAPP = () => <MainAPP dataMesAndLike = {dataMesAndLike} />;
+  let varibalsMainAPP = () => (
+    <MainAPP dataMesAndLike={dataMesAndLike} funAddPost={funAddPost} />
+  );
   let varibalsDialogs = () => <Dialogs names={names} messages={messages} />;
 
   return (
