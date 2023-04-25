@@ -27,15 +27,22 @@ type AppType = {
   messages: Array<MessageType>;
   dataMesAndLike: dataMesAndLikeType[];
   sidebar: Array<string>;
-  funAddPost: (a:string) => void;
+  funAddPost: () => void;
+  addTextPost: (a: string) => void;
+  textPost:string
 };
 
 
 const App: React.FC<AppType> = (props) => {
-  let { names, messages, dataMesAndLike, sidebar, funAddPost } = props;
+  let { names, messages, dataMesAndLike, sidebar, funAddPost,addTextPost,textPost } = props;
 
   let varibalsMainAPP = () => (
-    <MainAPP dataMesAndLike={dataMesAndLike} funAddPost={funAddPost} />
+    <MainAPP
+      dataMesAndLike={dataMesAndLike}
+      funAddPost={funAddPost}
+      addTextPost={addTextPost}
+      textPost={textPost}
+    />
   );
   let varibalsDialogs = () => <Dialogs names={names} messages={messages} />;
 

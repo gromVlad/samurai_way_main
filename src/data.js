@@ -1,4 +1,5 @@
-import { rerender } from "./render"
+//use fun
+let rerenderObserver = () => {}
 
 export const globalData = {
   names:[
@@ -26,15 +27,27 @@ export const globalData = {
       like: 15,
     }
   ],
-  sidebar:['alex','kate',"andor","han colo"]
+  sidebar:['alex','kate',"andor","han colo"],
+  textPost :'hello'
 }
 
 //create global function
-export const newAddPost = (mesPost) => {
+export const newAddPost = () => {
   const newPost = {
-    mes:mesPost,
+    mes:globalData.textPost,
     like:0
   }
   globalData.dataMesAndLike.push(newPost)
-  rerender(globalData)
+  globalData.textPost =""
+  rerenderObserver(globalData)
+}
+
+export const addTextPost = (text) => {
+  globalData.textPost = text
+  rerenderObserver(globalData)
+}
+
+//callback observer
+export const funRerender = (observer) => {
+  rerenderObserver = observer
 }
