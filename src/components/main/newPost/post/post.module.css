@@ -1,6 +1,29 @@
+.post {
+  width: 95%;
+  padding: 20px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.post:hover {
+  transform: scale(1.05);
+}
+
+.post-content {
+  word-break: break-word;
+}
+
 .img img {
   margin: 10px;
-  width: 100px;
-  height:100px;
+  max-width: 50px;
+  height: auto;
   border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .post {
+    width: 100%;
+  }
 }

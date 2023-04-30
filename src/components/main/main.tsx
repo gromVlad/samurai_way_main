@@ -3,13 +3,13 @@ import s from "./main.module.css";
 import { NewPost } from "./newPost/newPost";
 import { Headmain } from "./headmain/headmain";
 import { dataMesAndLikeType } from "../../App";
+import { Action } from "../../data";
 
 
 type MainAPPType = {
   dataMesAndLike: Array<dataMesAndLikeType>;
-  funAddPost: () => void;
-  addTextPost: (a: string) => void;
-  textPost:string
+  dispatch: (action: Action) => void;
+  textPost: string;
 };
 
 export function MainAPP(props: MainAPPType) {
@@ -18,8 +18,7 @@ export function MainAPP(props: MainAPPType) {
       <Headmain />
       <NewPost
         dataMesAndLike={props.dataMesAndLike}
-        funAddPost={props.funAddPost}
-        addTextPost={props.addTextPost}
+        dispatch={props.dispatch}
         textPost={props.textPost}
       />
     </main>

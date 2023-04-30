@@ -8,6 +8,7 @@ import { Dialogs } from "./components/dialogs/dialogs";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Music } from "./components/music/music";
 import { News } from "./components/news/news";
+import { Action } from "./data";
 
 export type namesType = {
   name:string,
@@ -27,24 +28,38 @@ type AppType = {
   messages: Array<MessageType>;
   dataMesAndLike: dataMesAndLikeType[];
   sidebar: Array<string>;
-  funAddPost: () => void;
-  addTextPost: (a: string) => void;
-  textPost:string
+  dispatch: (action: Action) => void;
+  textPost: string;
+  textMessage:string;
 };
 
 
 const App: React.FC<AppType> = (props) => {
-  let { names, messages, dataMesAndLike, sidebar, funAddPost,addTextPost,textPost } = props;
+  let {
+    names,
+    messages,
+    dataMesAndLike,
+    sidebar,
+    dispatch,
+    textPost,
+    textMessage,
+  } = props;
 
   let varibalsMainAPP = () => (
     <MainAPP
       dataMesAndLike={dataMesAndLike}
-      funAddPost={funAddPost}
-      addTextPost={addTextPost}
+      dispatch={dispatch}
       textPost={textPost}
     />
   );
-  let varibalsDialogs = () => <Dialogs names={names} messages={messages} />;
+  let varibalsDialogs = () => (
+    <Dialogs
+      names={names}
+      messages={messages}
+      textMessage={textMessage}
+      dispatch={dispatch}
+    />
+  );
 
   return (
     <BrowserRouter>

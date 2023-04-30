@@ -2,27 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { funRerender, globalData} from './data';
-import { addTextPost, newAddPost } from "./data";
+import {AllGlobalType, store} from './data';
 
-export let rerender = (props:any) => {
-  let {names,messages,dataMesAndLike,sidebar,textPost,...other} = props
+export const rerender = (props:AllGlobalType) => {
+  let { names, messages, dataMesAndLike, sidebar, textPost, textMessage } =
+    props;
 
   ReactDOM.render(
     <App
+      textMessage={textMessage}
       names={names}
       messages={messages}
       dataMesAndLike={dataMesAndLike}
       sidebar={sidebar}
-      funAddPost={newAddPost}
-      addTextPost={addTextPost}
+      dispatch={store.dispatch.bind(store)}
       textPost={textPost}
     />,
     document.getElementById("root")
   );
 };
-rerender(globalData)
+rerender(store.getState())
 
 //передаем callback функцию rerender
-funRerender(rerender);
+store.funRerender(() => rerender(store.getState()));
 

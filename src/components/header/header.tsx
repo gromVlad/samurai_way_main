@@ -1,7 +1,5 @@
 import React from "react";
 import s from "./header.module.css";
-console.log(s);//header :"header_header__Xrmhv"
-
 
 export function HeaderAPP() {
   return (

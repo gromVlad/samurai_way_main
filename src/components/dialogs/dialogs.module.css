@@ -1,20 +1,43 @@
-.content{
-  display: grid;
-  grid-template-columns: 2fr 10fr;
-}
-
-.content__users{
+.content {
+  display: flex;
   padding: 20px;
 }
-.content__user{
-  padding: 8px;
+
+.content__users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  flex-direction: column; /* Добавлено свойство */
+  margin-bottom: 20px;
 }
 
-.content__user a{
+.content__user {
+  padding: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.content__user a {
   color: black;
   text-decoration: none;
 }
 
-.content__users .active{
+.content__users .active {
   color: rgb(233, 219, 24);
+}
+
+@media (min-width: 768px) {
+  .content {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .content__users {
+    margin-bottom: 0;
+  }
+
+  .content__user:hover {
+    transform: scale(1.05);
+  }
 }
