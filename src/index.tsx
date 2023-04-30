@@ -2,21 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {AllGlobalType, store} from './data';
+import {store} from './data';
+import { Store } from 'antd/lib/form/interface';
 
-export const rerender = (props:AllGlobalType) => {
-  let { names, messages, dataMesAndLike, sidebar, textPost, textMessage } =
-    props;
+export const rerender = (props:Store) => {
+  let { names, dataPost, sidebar, mesOBJ } = props;
 
   ReactDOM.render(
     <App
-      textMessage={textMessage}
+      textMessage={mesOBJ.textMessage}
       names={names}
-      messages={messages}
-      dataMesAndLike={dataMesAndLike}
+      messages={mesOBJ.messages}
+      dataMesAndLike={dataPost.dataMesAndLike}
       sidebar={sidebar}
       dispatch={store.dispatch.bind(store)}
-      textPost={textPost}
+      textPost={dataPost.textPost}
     />,
     document.getElementById("root")
   );

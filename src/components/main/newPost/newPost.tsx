@@ -1,8 +1,9 @@
 import s from "./newPost.module.css";
 import { Post } from "./post/post";
 import { dataMesAndLikeType } from "../../../App";
-import { Action, addPostsActCreator, addTextsActCreator } from "../../../data";
+import { Action} from "../../../data";
 import { ChangeEvent } from "react";
+import { addPostsActCreator, addTextsActCreator } from "../../redusers/reduser_post";
 
 type NewPostType = {
   dataMesAndLike: Array<dataMesAndLikeType>;

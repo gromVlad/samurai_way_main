@@ -4,7 +4,8 @@ import { Message } from "./message/message";
 import { Users } from "./users/users";
 import { namesType } from "../../App";
 import { MessageType } from "../../App";
-import { Action, addMesActCreator, addTextMesActCreator } from "../../data";
+import { Action } from "../../data";
+import { addMesActCreator, addTextMesActCreator } from "../redusers/reduser.messages";
 
 type DialogsType = {
   names: Array<namesType>;
