@@ -4,12 +4,13 @@ import { NavLink } from "react-router-dom";
 
 
 type NavigationAPPType = {
-  sidebar: Array<string>;
+  // sidebar: Array<string>;
+  store:any
 };
 
 export function NavigationAPP(props: NavigationAPPType) {
 
-  const friends = props.sidebar.map(el => <p>{el} </p>)
+  const friends = props.store.sidebar.map((el:any) => <p>{el} </p>)
 
   return (
     <nav className={s.nav}>

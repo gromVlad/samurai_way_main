@@ -1,8 +1,10 @@
-import { Message } from "../../data";
+//import { Message } from "../../data";
 
+//const
 const ADD_MESSAGE = "ADD_MESSAGE";
 const ADD_TEXT_MESSAGE = "ADD_TEXT_MESSAGE";
 
+//type action
 type AddMESAction = {
   type: "ADD_MESSAGE";
 };
@@ -14,12 +16,32 @@ type AddTextMESAction = {
 
 export type ActionMessages = AddMESAction | AddTextMESAction;
 
-type reduserPostType = {
-  textMessage: string;
-  messages: Message[];
+//type state
+export type Message = {
+  mes: string;
 };
 
-export const reduserMessages = (state: reduserPostType, action: ActionMessages):reduserPostType => {
+export type InitStateType = {
+    textMessage: string;
+    messages: Message[];
+  };
+
+//init state
+export const initstateMes: InitStateType = {
+  textMessage: "hello",
+  messages: [
+    { mes: "Hello my name is Vlad" },
+    { mes: "What.." },
+    { mes: "Hello" },
+    { mes: "Hello my name is Vlad" },
+    { mes: "my names.." },
+  ],
+};
+
+export const reduserMessages = (
+  state = initstateMes,
+  action: ActionMessages
+): InitStateType => {
   if (action.type === ADD_MESSAGE) {
     const newmes = {
       mes: state.textMessage,
@@ -29,7 +51,7 @@ export const reduserMessages = (state: reduserPostType, action: ActionMessages):
   } else if (action.type === ADD_TEXT_MESSAGE) {
     state.textMessage = action.newMes;
   }
-  
+
   return state;
 };
 

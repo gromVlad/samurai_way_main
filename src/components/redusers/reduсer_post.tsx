@@ -1,8 +1,10 @@
-import { DataMesAndLike } from "../../data";
+//import { DataMesAndLike } from "../../data";
 
+//const 
 const ADD_POST = "ADD_POST";
 const ADD_TEXT_POST = "ADD_TEXT_POST";
 
+//action type
 type AddPostAction = {
   type: "ADD_POST";
 };
@@ -12,16 +14,36 @@ type AddTextPostAction = {
   newText: string;
 };
 
-export type ActionPost =
-  | AddPostAction
-  | AddTextPostAction
+export type ActionPost = AddPostAction | AddTextPostAction;
 
-type dataPostType = {
-    textPost: string;
-    dataMesAndLike: DataMesAndLike[];
-  };
+//type init state
+type DataMesAndLike = {
+  mes: string;
+  like: number;
+};
 
-export const reduserPost = (state: dataPostType, action: ActionPost)=> {
+export type DataPostType = {
+  textPost: string;
+  dataMesAndLike: DataMesAndLike[];
+};
+
+//init state
+export const initialStatePost: DataPostType = {
+  textPost: "hello",
+  dataMesAndLike: [
+    {
+      mes: "hello world",
+      like: 23,
+    },
+    {
+      mes: "What your name?",
+      like: 15,
+    },
+  ],
+};
+
+//reduser
+export const reduserPost = (state = initialStatePost, action: ActionPost) => {
   if (action.type === ADD_POST) {
     const newPost = {
       mes: state.textPost,
@@ -36,6 +58,7 @@ export const reduserPost = (state: dataPostType, action: ActionPost)=> {
   return state;
 };
 
+//action create
 export const addPostsActCreator = (): AddPostAction => ({ type: ADD_POST });
 
 export const addTextsActCreator = (text: string): AddTextPostAction => {

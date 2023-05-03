@@ -1,5 +1,5 @@
-import { ActionMessages, reduserMessages } from "./components/redusers/reduser.messages";
-import { ActionPost, reduserPost } from "./components/redusers/reduser_post";
+import { ActionMessages, reduserMessages } from "./components/redusers/reduсer.messages";
+import { ActionPost, reduserPost } from "./components/redusers/reduсer_post";
 
 type Name = {
   name: string;
