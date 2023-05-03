@@ -1,12 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
-import s from "./dialogs.module.css";
-import { Message } from "./message/message";
-import { Users } from "./users/users";
-import { Action } from "../../data";
 import { addMesActCreator, addTextMesActCreator } from "../redusers/reduсer.messages";
 import { StateType } from "../..";
-import { Name } from "../redusers/reduсer_name";
 import { Dialogs } from "./dialogs";
+import { StoreContext } from "../../context";
 
 type DialogsType = {
   store: StateType;
@@ -24,10 +19,15 @@ export function DialogsContainer (props: DialogsType) {
   }
 
   return (
-    <Dialogs
-      store={props.store}
+    <StoreContext.Consumer>
+      {(value) => (
+        <Dialogs
+      store={props.store} 
+      value = {value}
       addNewText={addNewText}
       addNewMessage={addNewMessage}
     />
+      )}
+    </StoreContext.Consumer>
   );
 }

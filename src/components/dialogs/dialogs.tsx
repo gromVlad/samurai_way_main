@@ -11,6 +11,7 @@ type DialogsType = {
   store: StateType;
   addNewText: (text: string) => void;
   addNewMessage: () => void;
+  value:string
 };
 
 export function Dialogs(props: DialogsType) {
@@ -28,6 +29,7 @@ export function Dialogs(props: DialogsType) {
 
   return (
     <main>
+      <h1>{props.value}</h1>
       <input
         type="text"
         value={props.store.mesOBJ.textMessage}

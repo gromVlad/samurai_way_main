@@ -21,7 +21,7 @@ const App: React.FC<AppType> = (props) => {
     <MainAPP store={props.store} dispatch={props.dispatch} />
   );
   let varibalsDialogs = () => (
-    <DialogsContainer store={props.store} dispatch={props.dispatch} />
+      <DialogsContainer store={props.store} dispatch={props.dispatch} />
   );
 
   return (
