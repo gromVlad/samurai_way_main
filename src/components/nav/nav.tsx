@@ -1,11 +1,11 @@
 import React from "react";
 import s from "./nav.module.css";
 import { NavLink } from "react-router-dom";
+import { StateType } from "../..";
 
 
 type NavigationAPPType = {
-  // sidebar: Array<string>;
-  store:any
+  store:StateType
 };
 
 export function NavigationAPP(props: NavigationAPPType) {

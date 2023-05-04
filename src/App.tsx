@@ -8,27 +8,22 @@ import { Music } from "./components/music/music";
 import { News } from "./components/news/news";
 import { StateType } from ".";
 import { DialogsContainer } from "./components/dialogs/dialogsContainer";
+import { connect } from "react-redux";
 
 
-type AppType = {
-  store: StateType;
-  dispatch: (action: any) => void;
-};
-
-
-const App: React.FC<AppType> = (props) => {
+const App = () => {
   let varibalsMainAPP = () => (
-    <MainAPP store={props.store} dispatch={props.dispatch} />
+    <MainAPP />
   );
   let varibalsDialogs = () => (
-      <DialogsContainer store={props.store} dispatch={props.dispatch} />
+      <DialogsContainer  />
   );
 
   return (
     <BrowserRouter>
       <div className="App">
         <HeaderAPP />
-        <NavigationAPP store = {props.store} />
+        <ContainerNav />
         <div className="content">
           <Route path="/prof" render={varibalsMainAPP} />
           <Route path="/dial" render={varibalsDialogs} />
@@ -40,3 +35,11 @@ const App: React.FC<AppType> = (props) => {
   );   
 }
 export default App;
+
+let mapStoreToProps = (state:StateType) => {
+  return{
+    store:state
+  }
+};
+
+const ContainerNav = connect(mapStoreToProps)(NavigationAPP);

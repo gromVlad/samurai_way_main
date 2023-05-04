@@ -2,16 +2,12 @@ import React, { ChangeEvent, useState } from "react";
 import s from "./dialogs.module.css";
 import { Message } from "./message/message";
 import { Users } from "./users/users";
-import { Action } from "../../data";
-import { addMesActCreator, addTextMesActCreator } from "../redusers/reduсer.messages";
 import { StateType } from "../..";
-import { Name } from "../redusers/reduсer_name";
 
 type DialogsType = {
   store: StateType;
   addNewText: (text: string) => void;
   addNewMessage: () => void;
-  value:string
 };
 
 export function Dialogs(props: DialogsType) {
@@ -29,7 +25,6 @@ export function Dialogs(props: DialogsType) {
 
   return (
     <main>
-      <h1>{props.value}</h1>
       <input
         type="text"
         value={props.store.mesOBJ.textMessage}

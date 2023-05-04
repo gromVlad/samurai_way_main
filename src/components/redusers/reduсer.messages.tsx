@@ -43,13 +43,10 @@ export const reduserMessages = (
   action: ActionMessages
 ): InitStateType => {
   if (action.type === ADD_MESSAGE) {
-    const newmes = {
-      mes: state.textMessage,
-    };
-    state.messages.push(newmes);
-    state.textMessage = "";
+    return {...state,messages:[...state.messages,{mes:state.textMessage}],textMessage:""}
+    
   } else if (action.type === ADD_TEXT_MESSAGE) {
-    state.textMessage = action.newMes;
+    return {...state,textMessage:action.newMes}
   }
 
   return state;

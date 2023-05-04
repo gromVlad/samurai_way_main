@@ -1,29 +1,25 @@
 import { addPostsActCreator, addTextsActCreator } from "../../redusers/reduсer_post";
 import { StateType } from "../../..";
 import { NewPost } from "./newPost";
+import { connect } from "react-redux";
 
-type NewPostType = {
-  store: StateType;
-  dispatch: (action: any) => void;
+
+
+const mapStateToProps = (state:StateType) => {
+  return {
+    store: state,
+  };
 };
 
-export function NewPostContainer (props: NewPostType) {
-
-  const onChangetext = (text:string) => {
-    props.dispatch(addTextsActCreator(text));
+const mapDispatchToProps = (dispatch:(action:any) => void) => {
+  return {
+    onChangetext: (text: string) => {
+      dispatch(addTextsActCreator(text));
+    },
+    addPost:() => {
+      dispatch(addPostsActCreator());
+    }
   };
+};
 
-  const addPost = () => {
-    props.dispatch(addPostsActCreator());
-  };
-
-  return (
-    <div >
-      <NewPost
-        store={props.store}
-        onChangetext={onChangetext}
-        addPost={addPost}
-      />
-    </div>
-  );
-}
+export const NewPostContainer = connect(mapStateToProps, mapDispatchToProps)(NewPost);

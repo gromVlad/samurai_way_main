@@ -5,7 +5,7 @@ import { DataPostType } from "./components/redusers/reduсer_post";
 import { InitStateType } from "./components/redusers/reduсer.messages";
 import { Name } from "./components/redusers/reduсer_name";
 import { store } from "./components/redusers/redux-store";
-import { Providers} from "./context";
+import { Provider } from "react-redux";
 
 export type StateType = {
   dataPost: DataPostType;
@@ -14,15 +14,14 @@ export type StateType = {
   sidebar: string[];
 };
 
-export const rerender = (state: StateType) => {
-  console.log(state);
+export const rerender = () => {
   ReactDOM.render(
-    <Providers value={'hello'}>
-      <App store={state} dispatch={store.dispatch.bind(store)} />
-    </Providers>,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById("root")
   );
 };
-rerender(store.getState());
+rerender();
 
-store.subscribe(() => rerender(store.getState()));
+store.subscribe(() => rerender());

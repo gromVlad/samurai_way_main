@@ -1,33 +1,23 @@
 import { addMesActCreator, addTextMesActCreator } from "../redusers/reduсer.messages";
 import { StateType } from "../..";
 import { Dialogs } from "./dialogs";
-import { StoreContext } from "../../context";
+import { connect } from "react-redux";
 
-type DialogsType = {
-  store: StateType;
-  dispatch: (action: any) => void;
+const mapStateToProps = (state:StateType) => {
+  return {
+    store:state
+  }
+}
+
+const mapDispatchToProps = (dispatch:(action: any) => void) => {
+  return {
+    addNewText: (text: string) => {
+      dispatch(addTextMesActCreator(text));
+    },
+    addNewMessage: () => {
+      dispatch(addMesActCreator());
+    },
+  };
 };
 
-export function DialogsContainer (props: DialogsType) {
-  
-  const addNewText = (text:string) => {
-    props.dispatch(addTextMesActCreator(text));
-  };
-
-  const addNewMessage = () => {
-    props.dispatch(addMesActCreator());
-  }
-
-  return (
-    <StoreContext.Consumer>
-      {(value) => (
-        <Dialogs
-      store={props.store} 
-      value = {value}
-      addNewText={addNewText}
-      addNewMessage={addNewMessage}
-    />
-      )}
-    </StoreContext.Consumer>
-  );
-}
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);

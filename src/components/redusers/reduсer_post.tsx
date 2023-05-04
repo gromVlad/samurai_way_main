@@ -45,16 +45,10 @@ export const initialStatePost: DataPostType = {
 //reduser
 export const reduserPost = (state = initialStatePost, action: ActionPost) => {
   if (action.type === ADD_POST) {
-    const newPost = {
-      mes: state.textPost,
-      like: 0,
-    };
-    state.dataMesAndLike.push(newPost);
-    state.textPost = "";
+    return { ...state, dataMesAndLike:[...state.dataMesAndLike,{mes:state.textPost,like:0}],textPost:""};
   } else if (action.type === ADD_TEXT_POST) {
-    state.textPost = action.newText;
+    return {...state,textPost:action.newText}
   }
-
   return state;
 };
 
