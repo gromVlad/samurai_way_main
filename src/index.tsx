@@ -6,12 +6,14 @@ import { InitStateType } from "./components/redusers/reduсer.messages";
 import { Name } from "./components/redusers/reduсer_name";
 import { store } from "./components/redusers/redux-store";
 import { Provider } from "react-redux";
+import { InitState } from "./components/redusers/reduсer_users";
 
 export type StateType = {
   dataPost: DataPostType;
   mesOBJ: InitStateType;
   names: Name[];
   sidebar: string[];
+  usersPage:InitState
 };
 
 export const rerender = () => {

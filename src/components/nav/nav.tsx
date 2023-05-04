@@ -35,10 +35,15 @@ export function NavigationAPP(props: NavigationAPPType) {
         <NavLink to="/music" activeClassName={s.active}>
           Music
         </NavLink>
-        <div>
-          <h3>Friends</h3>
-          {friends}
-        </div>
+      </div>
+      <div>
+        <NavLink to="/user" activeClassName={s.active}>
+          Users
+        </NavLink>
+      </div>
+      <div>
+        <h3>Friends</h3>
+        {friends}
       </div>
     </nav>
   );

@@ -9,6 +9,7 @@ import { News } from "./components/news/news";
 import { StateType } from ".";
 import { DialogsContainer } from "./components/dialogs/dialogsContainer";
 import { connect } from "react-redux";
+import { ContainerUser } from "./components/users/containerUser";
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
   let varibalsDialogs = () => (
       <DialogsContainer  />
   );
+  let varibalsContainer = () => <ContainerUser />;
 
   return (
     <BrowserRouter>
@@ -29,6 +31,7 @@ const App = () => {
           <Route path="/dial" render={varibalsDialogs} />
           <Route path="/music/*" component={Music} />
           <Route path="/news/*" component={News} />
+          <Route path="/user*" render={varibalsContainer} />
         </div>
       </div>
     </BrowserRouter>
