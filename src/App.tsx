@@ -19,8 +19,8 @@ const App = () => {
   let varibalsDialogs = () => (
       <DialogsContainer  />
   );
-  let varibalsContainer = () => <ContainerUser />;
 
+  let varibalsContainer = () => <ContainerUser />;
   return (
     <BrowserRouter>
       <div className="App">
@@ -31,7 +31,7 @@ const App = () => {
           <Route path="/dial" render={varibalsDialogs} />
           <Route path="/music/*" component={Music} />
           <Route path="/news/*" component={News} />
-          <Route path="/user*" render={varibalsContainer} />
+          <Route path="/user" render={varibalsContainer} />
         </div>
       </div>
     </BrowserRouter>

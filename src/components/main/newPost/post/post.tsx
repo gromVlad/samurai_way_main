@@ -11,7 +11,7 @@ export function Post(props: PostPropsType) {
     <div className={s.post}>
       <div className={s.img}>
         <img
-          src="https://cspromogame.ru//storage/upload_images/avatars/3981.jpg"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCtD45prNekiuSr4v-cmb9PT1udNRsRlrxEkJI8fXFBtbt-9A2c3OVKrG9fuoR0VIlTf4&usqp=CAU"
           alt="ava"
         />
       </div>

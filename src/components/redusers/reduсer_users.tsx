@@ -1,99 +1,95 @@
-import { v1 } from "uuid";
-
 const FOLLOW_FALSE = "FOLLOW_FALSE";
 const FOLLOW_TRUE = "FOLLOW_TRUE";
 const ADD_STATE = "ADD_STATE";
+const CURRENT_PAGE = "CURRENT_PAGE";
 
-type User = {
-  id: string;
-  img: string;
-  following: boolean;
-  location: string;
+type Item = {
+  id: number;
   name: string;
-  surname: string;
-  status: string;
+  photos: {
+    small: string | null;
+    large: string | null;
+  };
+  status: string | null;
+  followed: boolean;
 };
 
 export type InitState = {
-  users: User[];
+  items: Item[];
+  totalCount: number;
+  error: null | string;
+  pageNumber: number;
+  currentPage: number
 };
 
-const initStateUsers: InitState = {
-  users: [
-    {
-      id: v1(),
-      img: "https://static8.tgstat.ru/channels/_0/c8/c8fcdb7e4656ff95aa29067c6ce4dc85.jpg",
-      following: false,
-      location: "New York",
-      name: "John",
-      surname: "Doe",
-      status: "Active",
-    },
-    {
-      id: v1(),
-      img: "https://static8.tgstat.ru/channels/_0/c8/c8fcdb7e4656ff95aa29067c6ce4dc85.jpg",
-      following: true,
-      location: "Los Angeles",
-      name: "Mary",
-      surname: "Smith",
-      status: "Inactive",
-    },
-    {
-      id: v1(),
-      img: "https://static8.tgstat.ru/channels/_0/c8/c8fcdb7e4656ff95aa29067c6ce4dc85.jpg",
-      following: false,
-      location: "Chicago",
-      name: "Peter",
-      surname: "Johnson",
-      status: "Active",
-    },
-  ],
+const initState: InitState = {
+  items: [],
+  totalCount: 0,
+  error: null,
+  pageNumber:6,
+  currentPage:1
 };
 
 export const reducerUsers = (
-  state = initStateUsers,
+  state = initState,
   action: ActionUsers
-): InitState => {
+): InitState  => {
   switch (action.type) {
     case FOLLOW_FALSE:
       return {
         ...state,
-        users: state.users.map((el) =>
-          el.id === action.payload.id ? { ...el, following: false } : el
+        items: state.items.map((el) =>
+          el.id === action.payload.id ? { ...el, followed: false } : el
         ),
       };
     case FOLLOW_TRUE:
       return {
         ...state,
-        users: state.users.map((el) =>
-          el.id === action.payload.id ? { ...el, following: true } : el
+        items: state.items.map((el) =>
+          el.id === action.payload.id ? { ...el, followed: true } : el
         ),
       };
     case ADD_STATE:
       return {
         ...state,
-        users: [...state.users, ...action.payload.state.users],
+        items: [...action.payload.state.items],
+        totalCount: action.payload.state.totalCount,
+        error: action.payload.state.error,
+      };
+    case CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage:action.payload.numPage
       };
     default:
       return state;
   }
 };
 
-export const actionFollowFalseAC = (idUser: string) => {
+export const actionFollowFalseAC = (id: number) => {
   return {
     type: FOLLOW_FALSE,
     payload: {
-      id: idUser,
-    } 
+      id: id,
+    },
   } as const;
 };
 
-export const actionFollowTrueAC = (idUser: string) => {
+export const actionFollowTrueAC = (id: number) => {
   return {
     type: FOLLOW_TRUE,
     payload: {
-      id: idUser,
-    } 
+      id: id,
+    },
+  } as const;
+};
+
+export const addCurrentPageAC = (numPage: number) => {
+  return {
+    type: CURRENT_PAGE,
+    payload: {
+      numPage: numPage,
+    },
   } as const;
 };
 
@@ -102,15 +98,17 @@ export const actionAddStateAC = (state: InitState) => {
     type: ADD_STATE,
     payload: {
       state: state,
-    } 
+    },
   } as const;
 };
 
 type ActionFollowFalseType = ReturnType<typeof actionFollowFalseAC>;
 type ActionFollowTrueType = ReturnType<typeof actionFollowTrueAC>;
 type ActionAddStateType = ReturnType<typeof actionAddStateAC>;
+type ActionAddPageType = ReturnType<typeof addCurrentPageAC>;
 
 type ActionUsers =
   | ActionFollowFalseType
   | ActionFollowTrueType
-  | ActionAddStateType;
+  | ActionAddStateType
+  | ActionAddPageType

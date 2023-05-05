@@ -5,30 +5,34 @@ import {
   actionFollowFalseAC,
   actionFollowTrueAC,
   actionAddStateAC,
+  addCurrentPageAC,
 } from "../redusers/reduсer_users";
 import { StateType } from "../..";
 
-const mapStateToPropsUS = (state: StateType) => {
+const mapStateToProps = (store: StateType) => {
   return {
-    store: state
+    store: store.usersPage
   };
 };
 
-const mapDispatchToPropsUS = (dispatch: (action: any) => void) => {
+const mapDispatchToProps = (dispatch: (action: any) => void) => {
   return {
-    followfalse: (id: string) => {
+    followfalse: (id: number) => {
       dispatch(actionFollowFalseAC(id));
     },
-    followtrue: (id: string) => {
+    followtrue: (id: number) => {
       dispatch(actionFollowTrueAC(id));
     },
     addNewState: (st: InitState) => {
       dispatch(actionAddStateAC(st));
     },
+    addNewpage: (page: number) => {
+      dispatch(addCurrentPageAC(page));
+    },
   };
 };
 
 export const ContainerUser = connect(
-  mapStateToPropsUS,
-  mapDispatchToPropsUS
+  mapStateToProps,
+  mapDispatchToProps
 )(UserUI);
