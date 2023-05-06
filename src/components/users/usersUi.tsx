@@ -31,14 +31,19 @@ export const UserUI = (props: UserUIType) => {
       .then((user) => addNewState(user.data));
   },[])
 
-  //calc page 
-  let countpageS = Math.ceil(store.totalCount / store.pageNumber)
+  //calc page
+  const funCalcCountAndPage = () => {
+    let newCountpage = [];
+    //calc page
+    let countpageS = Math.ceil(store.totalCount / store.pageNumber);
 
-  //create new arr for page
-  let newCountpage = []
-  for (let i = 0; i <= countpageS;i++ ){
-    newCountpage.push(i)
+    //create new arr for page
+    for (let i = 0; i <= countpageS; i++) {
+     newCountpage.push(i);
+    }
+    return newCountpage;
   }
+  const newCountpage = funCalcCountAndPage()
 
   //fun add new current page
   const AddNewCurrentPage = (page:number) => {
@@ -50,53 +55,63 @@ export const UserUI = (props: UserUIType) => {
       .then((user) => addNewState(user.data));
   }
   
+
   return (
-    <>
-    {/* number page  */}
-      {newCountpage
-        .slice(
-          store.currentPage - 1 <= 0 ? store.currentPage : store.currentPage - 1,
-          store.currentPage - 1 <= 0
-            ? store.currentPage + 10
-            : store.currentPage + 9
-        )
-        .map((el,index) => (
-          <span key={index} onClick={() => AddNewCurrentPage(el)} className={store.currentPage === el? styles.active : ''}> {el} </span>
-        ))}
+      <>
+        {/* number page  */}
+        {newCountpage
+          .slice(
+            store.currentPage - 1 <= 0
+              ? store.currentPage
+              : store.currentPage - 1,
+            store.currentPage - 1 <= 0
+              ? store.currentPage + 10
+              : store.currentPage + 9
+          )
+          .map((el, index) => (
+            <span
+              key={index}
+              onClick={() => AddNewCurrentPage(el)}
+              className={store.currentPage === el ? styles.active : ""}
+            >
+              {" "}
+              {el}{" "}
+            </span>
+          ))}
         . . .
-      <div className={styles["users-container"]}>
-        {store.items.map((user) => (
-          <div className={styles["user-card"]} key={user.id}>
-            <img
-              src={
-                user.photos.small ||
-                "https://kartinkin.net/uploads/posts/2021-07/1625791697_35-kartinkin-com-p-anime-patsan-v-maske-anime-krasivo-35.jpg"
-              }
-              alt={`${user.name}`}
-            />
-            <div className={styles["user-card-info"]}>
-              <div className={styles["user-card-name"]}>{`${user.name}`}</div>
-              <div className={styles["user-card-status"]}>{user.status}</div>
-              {user.followed ? (
-                <button
-                  className={styles["user-card-button"]}
-                  onClick={() => followfalseUi(user.id)}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  className={styles["user-card-button"]}
-                  onClick={() => followtrueUi(user.id)}
-                >
-                  Follow
-                </button>
-              )}
+        <div className={styles["users-container"]}>
+          {store.items.map((user) => (
+            <div className={styles["user-card"]} key={user.id}>
+              <img
+                src={
+                  user.photos.small ||
+                  "https://kartinkin.net/uploads/posts/2021-07/1625791697_35-kartinkin-com-p-anime-patsan-v-maske-anime-krasivo-35.jpg"
+                }
+                alt={`${user.name}`}
+              />
+              <div className={styles["user-card-info"]}>
+                <div className={styles["user-card-name"]}>{`${user.name}`}</div>
+                <div className={styles["user-card-status"]}>{user.status}</div>
+                {user.followed ? (
+                  <button
+                    className={styles["user-card-button"]}
+                    onClick={() => followfalseUi(user.id)}
+                  >
+                    Unfollow
+                  </button>
+                ) : (
+                  <button
+                    className={styles["user-card-button"]}
+                    onClick={() => followtrueUi(user.id)}
+                  >
+                    Follow
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
+          ))}
+        </div>
+      </>
+    );
 };
 
