@@ -14,24 +14,18 @@ type Item = {
   followed: boolean;
 };
 
-export type InitState = {
-  items: Item[];
-  totalCount: number;
-  error: null | string;
-  pageNumber: number;
-  currentPage: number
-};
-
-const initState: InitState = {
-  items: [],
+const initSt= {
+  items: [] as Item[],
   totalCount: 0,
   error: null,
   pageNumber:6,
   currentPage:1
 };
 
+export type InitState = typeof initSt
+
 export const reducerUsers = (
-  state = initState,
+  state = initSt,
   action: ActionUsers
 ): InitState  => {
   switch (action.type) {

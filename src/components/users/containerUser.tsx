@@ -1,21 +1,40 @@
 import { connect } from "react-redux";
 import { UserUI } from "./usersUi";
 import {
-  InitState,
   actionFollowFalseAC,
   actionFollowTrueAC,
   actionAddStateAC,
   addCurrentPageAC,
+  InitState,
 } from "../redusers/reduсer_users";
-import { StateType } from "../..";
+import { StateType } from "../redusers/redux-store";
+import { Dispatch } from "redux";
 
-const mapStateToProps = (store: StateType) => {
+export type AllTypeConnectUser = {
+  store: InitState;
+} & MapDispatchToPropsType;
+
+type MapStateToPropsType = {
+  store: InitState;
+};
+
+const mapStateToProps = (store:StateType ): MapStateToPropsType => {
   return {
-    store: store.usersPage
+    store: store.usersPage,
   };
 };
 
-const mapDispatchToProps = (dispatch: (action: any) => void) => {
+type MapDispatchToPropsType = {
+  followfalse: (id: number) => void;
+  followtrue: (id: number) => void;
+  addNewState: (st: InitState) => void;
+  addNewpage: (page: number) => void;
+};
+
+//обязательно импортируем Dispatch с redux
+const mapDispatchToProps = (
+  dispatch: Dispatch 
+): MapDispatchToPropsType => {
   return {
     followfalse: (id: number) => {
       dispatch(actionFollowFalseAC(id));

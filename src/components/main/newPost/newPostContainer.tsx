@@ -1,5 +1,5 @@
+import { StateType } from "../../redusers/redux-store";
 import { addPostsActCreator, addTextsActCreator } from "../../redusers/reduсer_post";
-import { StateType } from "../../..";
 import { NewPost } from "./newPost";
 import { connect } from "react-redux";
 

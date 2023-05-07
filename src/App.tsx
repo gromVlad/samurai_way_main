@@ -6,10 +6,10 @@ import { NavigationAPP } from "./components/nav/nav";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Music } from "./components/music/music";
 import { News } from "./components/news/news";
-import { StateType } from ".";
 import { DialogsContainer } from "./components/dialogs/dialogsContainer";
 import { connect } from "react-redux";
 import { ContainerUser } from "./components/users/containerUser";
+import { StateType } from "./components/redusers/redux-store";
 
 
 const App = () => {

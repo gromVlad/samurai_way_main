@@ -1,5 +1,5 @@
+import { StateType } from "../redusers/redux-store";
 import { addMesActCreator, addTextMesActCreator } from "../redusers/reduсer.messages";
-import { StateType } from "../..";
 import { Dialogs } from "./dialogs";
 import { connect } from "react-redux";
 

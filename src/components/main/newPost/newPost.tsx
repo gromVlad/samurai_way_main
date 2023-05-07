@@ -1,7 +1,7 @@
+import { StateType } from "../../redusers/redux-store";
 import s from "./newPost.module.css";
 import { Post } from "./post/post";
 import { ChangeEvent } from "react";
-import { StateType } from "../../..";
 
 type NewPostType = {
   store: StateType;

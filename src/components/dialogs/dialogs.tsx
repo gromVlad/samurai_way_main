@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import s from "./dialogs.module.css";
 import { Message } from "./message/message";
 import { Users } from "./users/users";
-import { StateType } from "../..";
+import { StateType } from "../redusers/redux-store";
 
 type DialogsType = {
   store: StateType;

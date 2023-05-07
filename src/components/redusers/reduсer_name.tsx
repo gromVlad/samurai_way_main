@@ -13,6 +13,6 @@ export const initialStateNames: Name[]= [
 ];
 
 //reduser
-export const reduserName = (state = initialStateNames, action:any) => {
+export const reduserName = (state = initialStateNames, action: any): Name[] => {
   return state;
 };
