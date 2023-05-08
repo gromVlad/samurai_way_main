@@ -2,13 +2,14 @@ import React from "react";
 import s from "./main.module.css";
 import { Headmain } from "./headmain/headmain";
 import { NewPostContainer } from "./newPost/newPostContainer";
+import { ConnectContainerHeadmain} from "./headmain/headmainContainer";
 
 
-export function MainAPP(/* props: MainAPPType */) {
+export function MainAPP() {
   return (
     <main className={s.content}>
-      <Headmain />
-      <NewPostContainer /* store={props.store} dispatch={props.dispatch} */ />
+      <ConnectContainerHeadmain />
+      <NewPostContainer />
     </main>
   );
 }

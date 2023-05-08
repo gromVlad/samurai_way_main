@@ -1,8 +1,179 @@
-.content{
-  padding: 20px;
+/* Стили для контейнера */
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 25px;
 }
 
-.titles{
-  text-align: left;
-  padding-left: 30px;
+/* Стили для заглушки */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 600px;
+}
+
+.placeholderImage {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.placeholderTitle {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+}
+
+/* Стили для профиля */
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для фото */
+.profilePhoto {
+  max-width: 100%;
+  margin-right: 20px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Анимация для фото */
+.profilePhoto:hover .profileImage {
+  transform: scale(1.1);
+}
+
+/* Стили для информации */
+.profileInfo {
+  flex: 2;
+  max-width: 600px;
+}
+
+.profileName {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.profileAbout {
+  font-size: 1.5rem;
+  color: #666;
+  margin: 0 0 20px 0;
+}
+
+.profileContacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profileContactItem {
+  flex: 1 0 50%;
+  margin-bottom: 10px;
+}
+
+.profileContactLink {
+  display: block;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.profileContactLink:hover {
+  color: #333;
+}
+
+.profileJob {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0 0 10px 0;
+}
+
+.profileJobTitle {
+  font-weight: 700;
+  color: #333;
+}
+
+.profileJobDesc {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+}
+
+.profileJobDescTitle {
+  font-weight: 700;
+  color: #333;
+}
+
+/* Медиа-запросы для адаптивности */
+
+@media (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profilePhoto {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileName {
+    font-size: 2rem;
+  }
+
+  .profileAbout {
+    font-size: 1.2rem;
+  }
+
+  .profileContacts {
+    flex-direction: column;
+  }
+
+  .profileContactItem {
+    flex: none;
+    margin-bottom: 5px;
+  }
+
+  .profileJob,
+  .profileJobDesc {
+    font-size: 1rem;
+  }
+
+  .profileJobTitle,
+  .profileJobDescTitle,
+  .profileContactLink {
+    font-size: 0.8rem;
+  }
+
+  .profileImage {
+    width: 150px;
+    height: 150px;
+  }
 }

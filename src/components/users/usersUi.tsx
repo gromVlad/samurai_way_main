@@ -1,11 +1,16 @@
-import React, { useEffect } from "react";
 import styles from "./usersUi.module.css";
-import axios from "axios";
-import { AllTypeConnectUser } from "./containerUser";
+import { InitState } from "../redusers/reduсer_users";
+import { NavLink } from "react-router-dom";
 
+type UserUIType = {
+  store: InitState;
+  AddNewCurrentPage: (page: number) => void;
+  followtrue: (id: number) => void;
+  followfalse: (id: number) => void;
+};
 
-export const UserUI = (props: AllTypeConnectUser) => {
-  const { store, followfalse, followtrue, addNewState, addNewpage } = props;
+export const UserUI = (props: UserUIType) => {
+  const { store, followfalse, followtrue, AddNewCurrentPage } = props;
 
   const followfalseUi = (id: number) => {
     followfalse(id);
@@ -14,15 +19,6 @@ export const UserUI = (props: AllTypeConnectUser) => {
   const followtrueUi = (id: number) => {
     followtrue(id);
   };
-
-  //first load on page
-  useEffect(() => {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${store.currentPage}&count=${store.pageNumber}`
-      )
-      .then((user) => addNewState(user.data));
-  }, []);
 
   //calc page
   const funCalcCountAndPage = () => {
@@ -37,16 +33,6 @@ export const UserUI = (props: AllTypeConnectUser) => {
     return newCountpage;
   };
   const newCountpage = funCalcCountAndPage();
-
-  //fun add new current page
-  const AddNewCurrentPage = (page: number) => {
-    addNewpage(page);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${store.pageNumber}`
-      )
-      .then((user) => addNewState(user.data));
-  };
 
   return (
     <>
@@ -69,13 +55,15 @@ export const UserUI = (props: AllTypeConnectUser) => {
       <div className={styles["users-container"]}>
         {store.items.map((user) => (
           <div className={styles["user-card"]} key={user.id}>
-            <img
-              src={
-                user.photos.small ||
-                "https://kartinkin.net/uploads/posts/2021-07/1625791697_35-kartinkin-com-p-anime-patsan-v-maske-anime-krasivo-35.jpg"
-              }
-              alt={`${user.name}`}
-            />
+            <NavLink to={`/prof/${user.id}`}>
+              <img
+                src={
+                  user.photos.small ||
+                  "https://kartinkin.net/uploads/posts/2021-07/1625791697_35-kartinkin-com-p-anime-patsan-v-maske-anime-krasivo-35.jpg"
+                }
+                alt={`${user.name}`}
+              />
+            </NavLink>
             <div className={styles["user-card-info"]}>
               <div className={styles["user-card-name"]}>{`${user.name}`}</div>
               <div className={styles["user-card-status"]}>{user.status}</div>
@@ -101,4 +89,3 @@ export const UserUI = (props: AllTypeConnectUser) => {
     </>
   );
 };
-

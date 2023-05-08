@@ -2,6 +2,7 @@ const FOLLOW_FALSE = "FOLLOW_FALSE";
 const FOLLOW_TRUE = "FOLLOW_TRUE";
 const ADD_STATE = "ADD_STATE";
 const CURRENT_PAGE = "CURRENT_PAGE";
+const IS_FETCHING = "IS_FETCHING";
 
 type Item = {
   id: number;
@@ -19,7 +20,8 @@ const initSt= {
   totalCount: 0,
   error: null,
   pageNumber:6,
-  currentPage:1
+  currentPage:1,
+  isFetching:true
 };
 
 export type InitState = typeof initSt
@@ -53,14 +55,19 @@ export const reducerUsers = (
     case CURRENT_PAGE:
       return {
         ...state,
-        currentPage:action.payload.numPage
+        currentPage: action.payload.numPage,
+      };
+    case IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.payload.isFetch
       };
     default:
       return state;
   }
 };
 
-export const actionFollowFalseAC = (id: number) => {
+export const actionFollowFalse = (id: number) => {
   return {
     type: FOLLOW_FALSE,
     payload: {
@@ -69,7 +76,7 @@ export const actionFollowFalseAC = (id: number) => {
   } as const;
 };
 
-export const actionFollowTrueAC = (id: number) => {
+export const actionFollowTrue = (id: number) => {
   return {
     type: FOLLOW_TRUE,
     payload: {
@@ -78,7 +85,7 @@ export const actionFollowTrueAC = (id: number) => {
   } as const;
 };
 
-export const addCurrentPageAC = (numPage: number) => {
+export const addCurrentPage = (numPage: number) => {
   return {
     type: CURRENT_PAGE,
     payload: {
@@ -87,7 +94,7 @@ export const addCurrentPageAC = (numPage: number) => {
   } as const;
 };
 
-export const actionAddStateAC = (state: InitState) => {
+export const actionAddState = (state: InitState) => {
   return {
     type: ADD_STATE,
     payload: {
@@ -96,13 +103,24 @@ export const actionAddStateAC = (state: InitState) => {
   } as const;
 };
 
-type ActionFollowFalseType = ReturnType<typeof actionFollowFalseAC>;
-type ActionFollowTrueType = ReturnType<typeof actionFollowTrueAC>;
-type ActionAddStateType = ReturnType<typeof actionAddStateAC>;
-type ActionAddPageType = ReturnType<typeof addCurrentPageAC>;
+export const actionIsFetching = (isFetch: boolean) => {
+  return {
+    type: IS_FETCHING,
+    payload: {
+      isFetch
+    },
+  } as const;
+};
+
+type ActionFollowFalseType = ReturnType<typeof actionFollowFalse>;
+type ActionFollowTrueType = ReturnType<typeof actionFollowTrue>;
+type ActionAddStateType = ReturnType<typeof actionAddState>;
+type ActionAddPageType = ReturnType<typeof addCurrentPage>;
+type ActionIsFetchingType = ReturnType<typeof actionIsFetching>;
 
 type ActionUsers =
   | ActionFollowFalseType
   | ActionFollowTrueType
   | ActionAddStateType
   | ActionAddPageType
+  | ActionIsFetchingType;
