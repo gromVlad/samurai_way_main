@@ -4,6 +4,7 @@ import { Headmain } from "./headmain";
 import { StateType } from "../../redusers/redux-store";
 import { DataPostType, ProfileType, addProfileCreator } from "../../redusers/reduсer_post";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 type ContainerHeadmai = {
   store: DataPostType;
@@ -13,11 +14,17 @@ type ContainerHeadmai = {
 export const ContainerHeadmain = (props: ContainerHeadmai) => {
   const { store, addProfileCreator } = props
 
-  useEffect(()=>{
+  interface RouteParams {
+    userID: string;
+  }
+
+  let { userID } = useParams<RouteParams>();
+
+  useEffect(() => {
     axios
-      .get("https://social-network.samuraijs.com/api/1.0/profile/2")
+      .get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
       .then((res) => addProfileCreator(res.data));
-  },[])
+  }, [userID]);
 
 
   return (

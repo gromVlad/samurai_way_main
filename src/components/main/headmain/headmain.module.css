@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 /* Стили для заглушки */
@@ -24,25 +24,27 @@
 
 .placeholderTitle {
   font-size: 2rem;
-  color: #333;
+  color: #050000;
   margin: 0;
 }
 
 /* Стили для профиля */
 .profile {
+  border-radius: 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   max-width: 1200px;
   padding: 20px;
-  background-color: #fff;
+  background-color: #cabe11;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Стили для фото */
 .profilePhoto {
-  max-width: 100%;
+  flex: 1;
+  max-width: 300px;
   margin-right: 20px;
   overflow: hidden;
   position: relative;
@@ -72,14 +74,14 @@
 .profileName {
   font-size: 3rem;
   font-weight: 700;
-  color: #333;
+  color: #000000;
   margin: 0 0 10px 0;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .profileAbout {
   font-size: 1.5rem;
-  color: #666;
+  color: #000000;
   margin: 0 0 20px 0;
 }
 
@@ -98,35 +100,35 @@
 
 .profileContactLink {
   display: block;
-  color: #666;
+   color: #000000;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
 
 .profileContactLink:hover {
-  color: #333;
+   color: #000000;
 }
 
 .profileJob {
   font-size: 1.2rem;
-  color: #666;
+  color: #000000;
   margin: 0 0 10px 0;
 }
 
 .profileJobTitle {
   font-weight: 700;
-  color: #333;
+   color: #000000;
 }
 
 .profileJobDesc {
   font-size: 1.2rem;
-  color: #666;
+   color: #000000;
   margin: 0;
 }
 
 .profileJobDescTitle {
   font-weight: 700;
-  color: #333;
+  color: #000000;
 }
 
 /* Медиа-запросы для адаптивности */

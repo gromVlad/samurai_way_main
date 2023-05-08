@@ -1,7 +1,7 @@
 .header {
   grid-area: header;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   background-color: linear-gradient(
     to bottom right,
@@ -48,4 +48,11 @@
   .header img {
     width: 60px;
   }
+}
+
+
+
+.user {
+  color: #fff;
+  margin-left: auto;
 }

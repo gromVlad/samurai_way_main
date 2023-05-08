@@ -10,6 +10,7 @@ import { DialogsContainer } from "./components/dialogs/dialogsContainer";
 import { connect } from "react-redux";
 import { ContainerUser } from "./components/users/containerUser";
 import { StateType } from "./components/redusers/redux-store";
+import { ConnectContainerHeader } from "./components/header/conteinerheader";
 
 
 const App = () => {
@@ -24,10 +25,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
-        <HeaderAPP />
+        <ConnectContainerHeader />
         <ContainerNav />
         <div className="content">
-          <Route path="/prof" render={varibalsMainAPP} />
+          <Route path="/prof/:userID?" render={varibalsMainAPP} />
           <Route path="/dial" render={varibalsDialogs} />
           <Route path="/music/*" component={Music} />
           <Route path="/news/*" component={News} />
