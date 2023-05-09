@@ -1,3 +1,7 @@
+import { Dispatch } from "react";
+import { userAPI } from "../dalAPI/apiAxios";
+import { Action } from "redux";
+
 const ADD_LOGIN = "ADD_LOGIN";
 
 export type DataType = {
@@ -50,3 +54,15 @@ export const isLoginCreator = (data: DataType, resultCode:number) => {
 export type AddisLoginAction = ReturnType<typeof isLoginCreator>;
 
 export type ActionPost = AddisLoginAction;
+
+//thunk
+export const loginCreatorThunk = () => {
+  return (dispatch: Dispatch<Action>) => {
+    userAPI.loginUser()
+    .then(data => {
+      if (data.resultCode === 0) {
+        dispatch(isLoginCreator(data.data, data.resultCode));
+      }
+    })
+  }
+}

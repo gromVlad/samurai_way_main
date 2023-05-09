@@ -1,5 +1,9 @@
 //import { DataMesAndLike } from "../../data";
 
+import { Dispatch } from "react";
+import { Action } from "redux";
+import { userAPI } from "../dalAPI/apiAxios";
+
 //const 
 const ADD_POST = "ADD_POST";
 const ADD_TEXT_POST = "ADD_TEXT_POST";
@@ -100,3 +104,10 @@ type AddTextPostAction = ReturnType<typeof addTextsActCreator>;
 type AddProfileAction = ReturnType<typeof addProfileCreator>;
 
 export type ActionPost = AddPostAction | AddTextPostAction | AddProfileAction;
+
+//thunk
+export const addProfileThunk = (userID:string) => {
+  return (dispatch: Dispatch<Action>) => {
+    userAPI.addprofile(userID).then((data) => dispatch(addProfileCreator(data)));
+  };
+};

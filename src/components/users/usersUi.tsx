@@ -1,27 +1,16 @@
 import styles from "./usersUi.module.css";
 import { InitState } from "../redusers/reduсer_users";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { userAPI } from "../dalAPI/apiAxios";
-
 type UserUIType = {
   store: InitState;
   AddNewCurrentPage: (page: number) => void;
-  followtrue: (id: number) => void;
-  followfalse: (id: number) => void;
-  actionIsProgressFollow:(isProgressFollow: boolean,id:number) => void
+  followUsersThunk: (id: number) => void;
+  unfollowUsersThunk: (id: number) => void;
 };
 
 export const UserUI = (props: UserUIType) => {
-  const { store, followfalse, followtrue, AddNewCurrentPage,actionIsProgressFollow } = props;
-
-  const followfalseUi = (id: number) => {
-    followfalse(id);
-  };
-
-  const followtrueUi = (id: number) => {
-    followtrue(id);
-  };
+  const { store, AddNewCurrentPage, followUsersThunk, unfollowUsersThunk } =
+    props;
 
   //calc page
   const funCalcCountAndPage = () => {
@@ -75,13 +64,7 @@ export const UserUI = (props: UserUIType) => {
                   disabled={store.isprogressFollow.some((el) => el === user.id)}
                   className={styles["user-card-button"]}
                   onClick={() => {
-                    actionIsProgressFollow(true, user.id);
-                    userAPI.deleteUser(user.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        followfalseUi(user.id);
-                      }
-                      actionIsProgressFollow(false, user.id);
-                    });
+                    unfollowUsersThunk(user.id);
                   }}
                 >
                   Unfollow
@@ -91,13 +74,7 @@ export const UserUI = (props: UserUIType) => {
                   disabled={store.isprogressFollow.some((el) => el === user.id)}
                   className={styles["user-card-button"]}
                   onClick={() => {
-                    actionIsProgressFollow(true, user.id);
-                    userAPI.addfollow(user.id).then((data) => {
-                      if (data.resultCode === 0) {
-                        followtrueUi(user.id);
-                      }
-                      actionIsProgressFollow(false, user.id);
-                    });
+                    followUsersThunk(user.id);
                   }}
                 >
                   Follow

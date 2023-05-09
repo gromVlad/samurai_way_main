@@ -2,26 +2,20 @@ import React, { useEffect } from "react";
 import { HeaderAPP } from "./header";
 import { connect } from "react-redux";
 import { StateType } from "../redusers/redux-store";
-import { DataType, isLoginCreator } from "../redusers/reduсer_login";
-import { userAPI } from "../dalAPI/apiAxios";
+import { DataType, isLoginCreator, loginCreatorThunk } from "../redusers/reduсer_login";
 
 type ContainerHeaderType = {
   data: DataType;
   resultCode: number;
-  isLoginCreator:(data: DataType, resultCode:number) => void
+  loginCreatorThunk: () => void;
 };
 
 const ContainerHeader = (props: ContainerHeaderType) => {
-  const { data, resultCode, isLoginCreator } = props
+  const { data, resultCode, loginCreatorThunk } = props;
 
   useEffect(() => {
-    userAPI.loginUser()
-    .then(data => {
-      if (data.resultCode === 0) {
-        isLoginCreator(data.data, data.resultCode);
-      }
-    }
-  )},[])  
+    loginCreatorThunk()
+  },[])  
 
   return <HeaderAPP data={data} resultCode={resultCode} />;
 };
@@ -38,6 +32,6 @@ const mapStateToProps = (store: StateType): MapStateToPropsType => {
 }
 };
 
-export const ConnectContainerHeader = connect(mapStateToProps, { isLoginCreator })(
+export const ConnectContainerHeader = connect(mapStateToProps, { loginCreatorThunk })(
   ContainerHeader
 );

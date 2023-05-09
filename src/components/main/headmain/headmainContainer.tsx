@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Headmain } from "./headmain";
 import { StateType } from "../../redusers/redux-store";
-import { DataPostType, ProfileType, addProfileCreator } from "../../redusers/reduсer_post";
-import axios from "axios";
+import { DataPostType, ProfileType, addProfileCreator, addProfileThunk } from "../../redusers/reduсer_post";
 import { useParams } from "react-router-dom";
+import { userAPI } from "../../dalAPI/apiAxios";
 
 type ContainerHeadmai = {
   store: DataPostType;
-  addProfileCreator: (profile: null | ProfileType) => void
+  addProfileThunk: (userID: string) => void;
 };
 
 export const ContainerHeadmain = (props: ContainerHeadmai) => {
-  const { store, addProfileCreator } = props
+  const { store, addProfileThunk } = props;
 
   interface RouteParams {
     userID: string;
@@ -20,10 +20,9 @@ export const ContainerHeadmain = (props: ContainerHeadmai) => {
 
   let { userID } = useParams<RouteParams>();
 
+
   useEffect(() => {
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
-      .then((res) => addProfileCreator(res.data));
+    addProfileThunk(userID);
   }, [userID]);
 
 
@@ -44,4 +43,6 @@ const mapStateToProps = (store: StateType): mapStateToPropsType => {
   };
 };
 
-export const ConnectContainerHeadmain = connect(mapStateToProps, {addProfileCreator})(ContainerHeadmain);
+export const ConnectContainerHeadmain = connect(mapStateToProps, { addProfileThunk })(
+  ContainerHeadmain
+);

@@ -1,3 +1,7 @@
+import { Dispatch } from "react";
+import { Action } from "redux";
+import { userAPI } from "../dalAPI/apiAxios";
+
 const FOLLOW_FALSE = "FOLLOW_FALSE";
 const FOLLOW_TRUE = "FOLLOW_TRUE";
 const ADD_STATE = "ADD_STATE";
@@ -143,3 +147,50 @@ type ActionUsers =
   | ActionAddPageType
   | ActionIsFetchingType
   | ActionIsProgressFollowType
+
+//thunk
+export const firstLoadUsersThunk = (currentPage:number, pageNumber:number) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch(actionIsFetching(true));
+    userAPI.getUsers(currentPage, pageNumber).then((data) => {
+      dispatch(actionIsFetching(false));
+      dispatch(actionAddState(data));
+    });
+  };
+};
+
+export const nextLoadUsersThunk = (page:number,pageNumber:number) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch(addCurrentPage(page));
+    dispatch(actionIsFetching(true));
+    userAPI.getUsers(page,pageNumber).then((data) => {
+      dispatch(actionIsFetching(false));
+      dispatch(actionAddState(data));
+    });
+  };
+};
+
+export const followUsersThunk = (id:number) => {
+  return (dispatch: Dispatch<Action>) => {
+     dispatch(actionIsProgressFollow(true, id));
+     userAPI.addfollow(id).then((data) => {
+       if (data.resultCode === 0) {
+         dispatch(actionFollowTrue(id));
+       }
+       dispatch(actionIsProgressFollow(false, id));
+     });
+  };
+};
+
+export const unfollowUsersThunk = (id:number) => {
+  return (dispatch: Dispatch<Action>) => {
+     dispatch(actionIsProgressFollow(true, id));
+     userAPI.deleteUser(id).then((data) => {
+       if (data.resultCode === 0) {
+         dispatch(actionFollowFalse(id));
+       }
+       dispatch(actionIsProgressFollow(false, id));
+     });
+  };
+};
+
