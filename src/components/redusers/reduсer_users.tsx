@@ -3,6 +3,7 @@ const FOLLOW_TRUE = "FOLLOW_TRUE";
 const ADD_STATE = "ADD_STATE";
 const CURRENT_PAGE = "CURRENT_PAGE";
 const IS_FETCHING = "IS_FETCHING";
+const PROGRESS_FOLLOW ="PROGRESS_FOLLOW"
 
 type Item = {
   id: number;
@@ -21,7 +22,8 @@ const initSt= {
   error: null,
   pageNumber:6,
   currentPage:1,
-  isFetching:true
+  isFetching:true,
+  isprogressFollow:[] as number[]
 };
 
 export type InitState = typeof initSt
@@ -60,7 +62,12 @@ export const reducerUsers = (
     case IS_FETCHING:
       return {
         ...state,
-        isFetching: action.payload.isFetch
+        isFetching: action.payload.isFetch,
+      };
+    case PROGRESS_FOLLOW:
+      return {
+        ...state,
+        isprogressFollow: action.payload.isProgressFollow ? [...state.isprogressFollow,action.payload.id] : state.isprogressFollow.filter(el => el !== action.payload.id)
       };
     default:
       return state;
@@ -112,15 +119,27 @@ export const actionIsFetching = (isFetch: boolean) => {
   } as const;
 };
 
+export const actionIsProgressFollow = (isProgressFollow: boolean,id:number) => {
+  return {
+    type: PROGRESS_FOLLOW,
+    payload: {
+      isProgressFollow,
+      id,
+    },
+  } as const;
+};
+
 type ActionFollowFalseType = ReturnType<typeof actionFollowFalse>;
 type ActionFollowTrueType = ReturnType<typeof actionFollowTrue>;
 type ActionAddStateType = ReturnType<typeof actionAddState>;
 type ActionAddPageType = ReturnType<typeof addCurrentPage>;
 type ActionIsFetchingType = ReturnType<typeof actionIsFetching>;
+type ActionIsProgressFollowType = ReturnType<typeof actionIsProgressFollow>
 
 type ActionUsers =
   | ActionFollowFalseType
   | ActionFollowTrueType
   | ActionAddStateType
   | ActionAddPageType
-  | ActionIsFetchingType;
+  | ActionIsFetchingType
+  | ActionIsProgressFollowType

@@ -110,3 +110,8 @@ span:hover {
     transform: scale(1);
   }
 }
+
+.user-card-button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+}

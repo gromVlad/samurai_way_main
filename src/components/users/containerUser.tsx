@@ -1,13 +1,19 @@
 import { connect } from "react-redux";
 import { UserUI } from "./usersUi";
 import {
-  InitState, actionAddState, actionFollowFalse, actionFollowTrue, actionIsFetching, addCurrentPage,
+  InitState,
+  actionAddState,
+  actionFollowFalse,
+  actionFollowTrue,
+  actionIsFetching,
+  actionIsProgressFollow,
+  addCurrentPage,
 } from "../redusers/reduсer_users";
 import { StateType } from "../redusers/redux-store";
-import { Dispatch } from "redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { Preloader } from "../preloader/preloader";
+import { userAPI } from "../dalAPI/apiAxios";
 
 export type AllTypeConnectUser = MapStateToPropsType & MapDispatchToPropsType;
 
@@ -27,6 +33,7 @@ type MapDispatchToPropsType = {
   actionAddState: (st: InitState) => void;
   addCurrentPage: (page: number) => void;
   actionIsFetching: (isFetch: boolean) => void;
+  actionIsProgressFollow:(isProgressFollow: boolean,id:number) => void
 };
 
 const UsePreContainerUI = (props: AllTypeConnectUser) => {
@@ -37,33 +44,26 @@ const UsePreContainerUI = (props: AllTypeConnectUser) => {
     actionAddState,
     addCurrentPage,
     actionIsFetching,
+    actionIsProgressFollow,
   } = props;
-  console.log(props);
+
   //first load on page
   useEffect(() => {
     actionIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${store.currentPage}&count=${store.pageNumber}`
-      )
-      .then((user) => {
-        actionIsFetching(false);
-        actionAddState(user.data);
-      });
+    userAPI.getUsers(store.currentPage, store.pageNumber).then((data) => {
+      actionIsFetching(false);
+      actionAddState(data);
+    });
   }, []);
 
   //fun add new current page
   const AddNewCurrentPage = (page: number) => {
     addCurrentPage(page);
     actionIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${store.pageNumber}`
-      )
-      .then((user) => {
-        actionIsFetching(false);
-        actionAddState(user.data);
-      });
+    userAPI.getUsers(page, store.pageNumber).then((data) => {
+      actionIsFetching(false);
+      actionAddState(data);
+    });
   };
 
   return (
@@ -76,6 +76,7 @@ const UsePreContainerUI = (props: AllTypeConnectUser) => {
           followfalse={actionFollowFalse}
           followtrue={actionFollowTrue}
           store={store}
+          actionIsProgressFollow={actionIsProgressFollow}
         />
       )}
     </>
@@ -88,6 +89,5 @@ export const ContainerUser = connect(mapStateToProps, {
   actionAddState,
   addCurrentPage,
   actionIsFetching,
+  actionIsProgressFollow,
 })(UsePreContainerUI);
-
-
