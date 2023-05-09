@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { ContainerUser } from "./components/users/containerUser";
 import { StateType } from "./components/redusers/redux-store";
 import { ConnectContainerHeader } from "./components/header/conteinerheader";
+import { LoginUser } from "./components/login/loginUser";
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/music/*" component={Music} />
           <Route path="/news/*" component={News} />
           <Route path="/user" render={varibalsContainer} />
+          <Route path="/login" component={LoginUser} />
         </div>
       </div>
     </BrowserRouter>

@@ -3,6 +3,7 @@ import s from "./dialogs.module.css";
 import { Message } from "./message/message";
 import { Users } from "./users/users";
 import { StateType } from "../redusers/redux-store";
+import { Redirect } from "react-router-dom";
 
 type DialogsType = {
   store: StateType;
@@ -11,6 +12,10 @@ type DialogsType = {
 };
 
 export function Dialogs(props: DialogsType) {
+  if (props.store.login.resultCode === 1) {
+    return <Redirect to={"/login"} />;
+  }
+
   const arrNames = props.store.names.map((el) => <Users name={el.name} id={el.id} />);
 
   const arrMessages = props.store.mesOBJ.messages.map((el:any) => <Message mes={el.mes} />);

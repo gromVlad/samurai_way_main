@@ -17,7 +17,7 @@ export const initialStateLogin = {
     email: null,
     login: null,
   } as DataType,
-  resultCode: 0,
+  resultCode: 1,
 };
 
 export type DataPostType = typeof initialStateLogin;
