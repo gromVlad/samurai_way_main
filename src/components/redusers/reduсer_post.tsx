@@ -4,10 +4,11 @@ import { Dispatch } from "react";
 import { Action } from "redux";
 import { userAPI } from "../dalAPI/apiAxios";
 
-//const 
+//const
 const ADD_POST = "ADD_POST";
 const ADD_TEXT_POST = "ADD_TEXT_POST";
 const ADD_PROFILE = "ADD_PROFILE";
+const SET_STATUS = "ADD_STATUS";
 
 //type init state
 type DataMesAndLike = {
@@ -16,7 +17,7 @@ type DataMesAndLike = {
 };
 
 export type ProfileType = {
-  aboutMe:string
+  aboutMe: string;
   userId: number;
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
@@ -51,6 +52,7 @@ export const initialStatePost = {
     } as DataMesAndLike,
   ],
   profile: null as null | ProfileType,
+  status: null as null | string,
 };
 
 export type DataPostType = typeof initialStatePost;
@@ -74,6 +76,11 @@ export const reduserPost = (
       return { ...state, textPost: action.newText };
     case ADD_PROFILE:
       return { ...state, profile: action.profile };
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.status,
+      };
     default:
       return state;
   }
@@ -86,7 +93,7 @@ export const addTextsActCreator = (text: string) => {
   return {
     type: ADD_TEXT_POST,
     newText: text,
-  } as const ;
+  } as const;
 };
 
 export const addProfileCreator = (profile: null | ProfileType) => {
@@ -96,18 +103,44 @@ export const addProfileCreator = (profile: null | ProfileType) => {
   } as const;
 };
 
+export const setStatusCreator = (status: string) => {
+  return {
+    type: SET_STATUS,
+    status,
+  } as const;
+};
+
 //action type
-type AddPostAction = ReturnType<typeof addPostsActCreator>
-
+type AddPostAction = ReturnType<typeof addPostsActCreator>;
 type AddTextPostAction = ReturnType<typeof addTextsActCreator>;
-
 type AddProfileAction = ReturnType<typeof addProfileCreator>;
+type SetStatusAction = ReturnType<typeof setStatusCreator>;
 
-export type ActionPost = AddPostAction | AddTextPostAction | AddProfileAction;
+export type ActionPost =
+  | AddPostAction
+  | AddTextPostAction
+  | AddProfileAction
+  | SetStatusAction;
 
 //thunk
-export const addProfileThunk = (userID:string) => {
+export const addProfileThunk = (userID: string) => {
   return (dispatch: Dispatch<Action>) => {
-    userAPI.addprofile(userID).then((data) => dispatch(addProfileCreator(data)));
+    userAPI
+      .addprofile(userID)
+      .then((data) => dispatch(addProfileCreator(data)));
+  };
+};
+
+export const getStatusThunk = (userID: string) => {
+  return (dispatch: Dispatch<Action>) => {
+    userAPI.addStatus(userID).then((data) => dispatch(setStatusCreator(data)));
+  };
+};
+
+export const updateStatusThunk = (status: string) => {
+  return (dispatch: Dispatch<Action>) => {
+    userAPI.updateStatus(status).then((data) => {
+      if (data.resultCode === 0) dispatch(setStatusCreator(status));
+    });
   };
 };

@@ -1,13 +1,16 @@
 import React from "react";
 import styles from "./headmain.module.css";
 import { DataPostType } from "../../redusers/reduсer_post";
+import { InputIsDone } from "../../inputIsDone.tsx/inputIsDone";
 
 type HeadmainType = {
   store: DataPostType;
+  status: null | string;
+  updateStatusThunk: (status: string) => void;
 };
 
 export function Headmain(props: HeadmainType) {
-  const { store } = props;
+  const { store, status, updateStatusThunk } = props;
   return (
     <div className={styles.container}>
       {!store.profile ? (
@@ -33,6 +36,12 @@ export function Headmain(props: HeadmainType) {
           <div className={styles.profileInfo}>
             <h1 className={styles.profileName}>{store.profile.fullName}</h1>
             <p className={styles.profileAbout}>{store.profile.aboutMe}</p>
+            <p className={styles.profileAbout}>
+              <InputIsDone
+                status={status ? status : "not  status"}
+                newStatus={updateStatusThunk}
+              />
+            </p>
             <ul className={styles.profileContacts}>
               {Object.entries(store.profile.contacts).map(([key, value]) => (
                 <li key={key} className={styles.profileContactItem}>
@@ -48,9 +57,7 @@ export function Headmain(props: HeadmainType) {
             </div>
             {store.profile.lookingForAJob && (
               <div className={styles.profileJobDesc}>
-                <p className={styles.profileJobDescTitle}>
-                  Job description:
-                </p>
+                <p className={styles.profileJobDescTitle}>Job description:</p>
                 {store.profile.lookingForAJobDescription}
               </div>
             )}

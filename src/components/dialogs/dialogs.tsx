@@ -12,9 +12,6 @@ type DialogsType = {
 };
 
 export function Dialogs(props: DialogsType) {
-  if (props.store.login.resultCode === 1) {
-    return <Redirect to={"/login"} />;
-  }
 
   const arrNames = props.store.names.map((el) => <Users name={el.name} id={el.id} />);
 

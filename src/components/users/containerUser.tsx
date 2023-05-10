@@ -10,6 +10,7 @@ import {
 import { StateType } from "../redusers/redux-store";
 import { useEffect } from "react";
 import { Preloader } from "../preloader/preloader";
+import { compose } from "redux";
 
 export type AllTypeConnectUser = MapStateToPropsType & MapDispatchToPropsType;
 
