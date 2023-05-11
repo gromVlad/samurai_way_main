@@ -1,14 +1,17 @@
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import { store } from "./components/redusers/redux-store";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import {  ContainerApp } from "./App";
 
 export const rerender = () => {
   ReactDOM.render(
+    <BrowserRouter>
     <Provider store={store}>
-      <App />
-    </Provider>,
+      <ContainerApp />
+    </Provider>
+    </BrowserRouter>,
     document.getElementById("root")
   );
 };

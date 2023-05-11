@@ -8,6 +8,7 @@ import { reducerUsers } from "./reduсer_users";
 import { reduserLogin } from "./reduсer_login";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
+import { reduserInitLog } from "./reduser_init";
 
 // add reducer combine
 const reduserBox = combineReducers({
@@ -17,7 +18,7 @@ const reduserBox = combineReducers({
   sidebar: reduserSudabar,
   usersPage: reducerUsers,
   login:reduserLogin,
-  form: formReducer
+  form: formReducer,
 });
 
 export type StateType = ReturnType<typeof reduserBox>;

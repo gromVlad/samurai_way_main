@@ -60,7 +60,7 @@ export type ActionPost = AddisLoginAction;
 //thunk
 export const loginCreatorThunk = () => {
   return (dispatch: Dispatch<Action>) => {
-    userAPI.loginUser()
+    return userAPI.loginUser()
     .then(data => {
       if (data.resultCode === 0) {
         dispatch(isLoginCreator(data.data, data.resultCode));
