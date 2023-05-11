@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 import { userAPI } from "../dalAPI/apiAxios";
 import { Action } from "redux";
 import { ThunkDispatch } from "redux-thunk";
+import { stopSubmit } from "redux-form";
 
 const ADD_LOGIN = "ADD_LOGIN";
 
@@ -78,6 +79,9 @@ export const loginOnPageThunk = (
     userAPI.loginUserOnPage(email,password,rememberMe).then((data) => {
       if (data.resultCode === 0) {
         dispatch(loginCreatorThunk());
+      } else{
+        let messageError = data.messages.length > 0 ? data.messages[0] : "some error"
+        dispatch(stopSubmit("login", { _error: messageError }));
       }
     });
   };

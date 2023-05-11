@@ -4,7 +4,6 @@ import { Headmain } from "./headmain";
 import { StateType } from "../../redusers/redux-store";
 import { DataPostType, ProfileType, addProfileCreator, addProfileThunk, getStatusThunk, updateStatusThunk } from "../../redusers/reduсer_post";
 import { useParams } from "react-router-dom";
-import { userAPI } from "../../dalAPI/apiAxios";
 
 type ContainerHeadmai = {
   status: null | string;
@@ -17,7 +16,7 @@ type ContainerHeadmai = {
 export const ContainerHeadmain = (props: ContainerHeadmai) => {
   const { store, status, addProfileThunk, getStatusThunk, updateStatusThunk } =
     props;
-
+  
   interface RouteParams {
     userID: string;
   }

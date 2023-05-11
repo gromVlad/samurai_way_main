@@ -57,6 +57,12 @@
   margin-left: auto;
 }
 
+.user a{
+  color: #fff;
+  margin-left: auto;
+  text-decoration: none
+}
+
 .bytton{
   margin: 5px;
 }

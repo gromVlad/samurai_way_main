@@ -47,6 +47,7 @@ export const LoginForm = (props: any) => {
         />
       </div>
       <button type="submit">Log In</button>
+      {props.error && <p>{props.error}</p>}
     </form>
   );
 };

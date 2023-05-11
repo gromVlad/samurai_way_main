@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./header.module.css";
 import { DataType } from "../redusers/reduсer_login";
+import { NavLink } from "react-router-dom";
 
 type HeaderAPPType = {
   data: DataType;
@@ -20,8 +21,11 @@ export function HeaderAPP(props: HeaderAPPType) {
       <div className={s.user}>
         {resultCode === 0 ? (
           <>
-            <div>Welcome <br /> {data.login}</div>
-            <button className={s.bytton}  onClick={() => logoutOnPageThunk()}>
+            <div>
+              Welcome <br />
+              <NavLink to={`/prof/${data.id}`}><div>{data.login} </div></NavLink>
+            </div>
+            <button className={s.bytton} onClick={() => logoutOnPageThunk()}>
               Out login
             </button>
           </>
@@ -32,3 +36,4 @@ export function HeaderAPP(props: HeaderAPPType) {
     </header>
   );
 }
+
