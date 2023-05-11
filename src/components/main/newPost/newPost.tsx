@@ -2,6 +2,12 @@ import { Field, reduxForm } from "redux-form";
 import { StateType } from "../../redusers/redux-store";
 import s from "./newPost.module.css";
 import { Post } from "./post/post";
+import { FormCustomInput } from "../../UI/formInputCustom";
+
+const required = (value: string) => (value ? undefined : "Required");
+const maxLength = (max: number) => (value: string) =>
+  value && value.length > max ? `Must be ${max} characters or less` : undefined;
+const maxLength15 = maxLength(15);
 
 type NewPostType = {
   store: StateType;
@@ -32,10 +38,11 @@ const PostReduxForm = (props: any) => {
       <div>
         <Field
           name="textMessagePost"
-          component="textarea"
-          type="text"
+          component={FormCustomInput}
+          type="textarea"
           placeholder="Type your post"
           className={`${s.field} ${s["s-field"]}`}
+          validate={[required, maxLength15]}
         />
       </div>
       <div>

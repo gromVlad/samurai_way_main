@@ -2,22 +2,29 @@ import React, { useEffect } from "react";
 import { HeaderAPP } from "./header";
 import { connect } from "react-redux";
 import { StateType } from "../redusers/redux-store";
-import { DataType, isLoginCreator, loginCreatorThunk } from "../redusers/reduсer_login";
+import { DataType, isLoginCreator, loginCreatorThunk, logoutOnPageThunk } from "../redusers/reduсer_login";
 
 type ContainerHeaderType = {
   data: DataType;
   resultCode: number;
   loginCreatorThunk: () => void;
+  logoutOnPageThunk: () => void;
 };
 
 const ContainerHeader = (props: ContainerHeaderType) => {
-  const { data, resultCode, loginCreatorThunk } = props;
+  const { data, resultCode, loginCreatorThunk, logoutOnPageThunk } = props;
 
   useEffect(() => {
     loginCreatorThunk()
   },[])  
 
-  return <HeaderAPP data={data} resultCode={resultCode} />;
+  return (
+    <HeaderAPP
+      data={data}
+      resultCode={resultCode}
+      logoutOnPageThunk={logoutOnPageThunk}
+    />
+  );
 };
 
 type MapStateToPropsType = {
@@ -32,6 +39,7 @@ const mapStateToProps = (store: StateType): MapStateToPropsType => {
 }
 };
 
-export const ConnectContainerHeader = connect(mapStateToProps, { loginCreatorThunk })(
-  ContainerHeader
-);
+export const ConnectContainerHeader = connect(mapStateToProps, {
+  loginCreatorThunk,
+  logoutOnPageThunk,
+})(ContainerHeader);

@@ -1,14 +1,12 @@
 //const
 const ADD_MESSAGE = "ADD_MESSAGE";
 
-
 export type ActionMessages = AddMESAction 
 
 //type state
 export type Message = {
   mes: string;
 };
-
 
 //init state
 export const initstateMes = {
@@ -33,7 +31,6 @@ export const reduserMessages = (
   } 
   return state;
 };
-
 
 export const addMesActCreator = (text: string) => {
   return {

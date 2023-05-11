@@ -3,6 +3,12 @@ import { Message } from "./message/message";
 import { Users } from "./users/users";
 import { StateType } from "../redusers/redux-store";
 import { Field, reduxForm } from "redux-form";
+import { FormCustomInput } from "../UI/formInputCustom";
+
+const required = (value:string) => (value ? undefined : "Required");
+const maxLength = (max:number) => (value:string) =>
+  value && value.length > max ? `Must be ${max} characters or less` : undefined;
+const maxLength15 = maxLength(15);
 
 type DialogsType = {
   store: StateType;
@@ -29,15 +35,18 @@ export function Dialogs(props: DialogsType) {
   );
 }
 
+
 const DialogsReduxForm = (props:any) => {
+
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
           name="textMessage"
-          component="input"
-          type="text"
+          component={FormCustomInput}
+          type="input"
           placeholder="Type your message"
+          validate={[required, maxLength15]}
         />
       </div>
       <div>

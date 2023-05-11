@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import { userAPI } from "../dalAPI/apiAxios";
 import { Action } from "redux";
+import { ThunkDispatch } from "redux-thunk";
 
 const ADD_LOGIN = "ADD_LOGIN";
 
@@ -66,3 +67,34 @@ export const loginCreatorThunk = () => {
     })
   }
 }
+
+export const loginOnPageThunk = (
+  email: string,
+  password: string,
+  rememberMe: boolean 
+) => {
+  return (dispatch:ThunkDispatch<DataPostType, void, Action>,
+    ) => {
+    userAPI.loginUserOnPage(email,password,rememberMe).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(loginCreatorThunk());
+      }
+    });
+  };
+};
+
+const nullLogin = {
+    id: null,
+    email: null,
+    login: null,
+}
+
+export const logoutOnPageThunk = () => {
+  return (dispatch: Dispatch<Action>) => {
+    userAPI.logoutUserOnPage().then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(isLoginCreator(nullLogin, 1));
+      }
+    });
+  };
+};

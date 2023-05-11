@@ -6,18 +6,18 @@ type MapToStateToPropsType = {
   resultCode:number
 };
 
-const mapToStateToProps = (store: StateType): MapToStateToPropsType => {
-  return {
-    resultCode: store.login.resultCode
-  }
-};
-
 export const IsAuthLogin = (Component:any) => {
   const RedirectComp = (props: MapToStateToPropsType) => {
     if (props.resultCode === 1) {
       return <Redirect to={"/login"} />;
     }
     return <Component {...props} />;
+  };
+
+  const mapToStateToProps = (store: StateType): MapToStateToPropsType => {
+    return {
+      resultCode: store.login.resultCode,
+    };
   };
 
   const ContainerRedirect = connect(mapToStateToProps)(RedirectComp);

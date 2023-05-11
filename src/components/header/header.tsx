@@ -5,10 +5,11 @@ import { DataType } from "../redusers/reduсer_login";
 type HeaderAPPType = {
   data: DataType;
   resultCode: number;
+  logoutOnPageThunk:() => void
 };
 
 export function HeaderAPP(props: HeaderAPPType) {
-  const { data, resultCode } = props;
+  const { data, resultCode, logoutOnPageThunk } = props;
 
   return (
     <header className={s.header}>
@@ -19,7 +20,10 @@ export function HeaderAPP(props: HeaderAPPType) {
       <div className={s.user}>
         {resultCode === 0 ? (
           <>
-            Welcome <br /> {data.login}
+            <div>Welcome <br /> {data.login}</div>
+            <button className={s.bytton}  onClick={() => logoutOnPageThunk()}>
+              Out login
+            </button>
           </>
         ) : (
           "Login"
