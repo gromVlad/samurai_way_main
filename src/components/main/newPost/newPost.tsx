@@ -1,12 +1,11 @@
+import { Field, reduxForm } from "redux-form";
 import { StateType } from "../../redusers/redux-store";
 import s from "./newPost.module.css";
 import { Post } from "./post/post";
-import { ChangeEvent } from "react";
 
 type NewPostType = {
   store: StateType;
-  onChangetext: (text: string) => void;
-  addPost:() => void
+  addPost: (text: string) => void;
 };
 
 export function NewPost(props: NewPostType) {
@@ -14,26 +13,37 @@ export function NewPost(props: NewPostType) {
     <Post message={el.mes} like={el.like} />
   ));
 
-  const onChangetextPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.onChangetext(e.currentTarget.value);
-  };
 
-  const addPostInPost = () => {
-    props.addPost();
+  const addPost = (values: any) => {
+    props.addPost(values.textMessagePost);
   };
 
   return (
     <div className={s.block}>
-      <textarea
-        value={props.store.dataPost.textPost}
-        onChange={onChangetextPost}
-      ></textarea>
-      <div>
-        <button className={s.button} onClick={addPostInPost}>
-          Click
-        </button>
-      </div>
+      <PostForm onSubmit={addPost} />
       {arrdataMesAndLike}
     </div>
   );
 }
+
+const PostReduxForm = (props: any) => {
+  return (
+    <form onSubmit={props.handleSubmit} className={s.form}>
+      <div>
+        <Field
+          name="textMessagePost"
+          component="textarea"
+          type="text"
+          placeholder="Type your post"
+          className={`${s.field} ${s["s-field"]}`}
+        />
+      </div>
+      <div>
+        <button className={s.button} type="submit">
+          Add message
+        </button>
+      </div>
+    </form>
+  );
+};
+const PostForm = reduxForm({ form: "PostForm" })(PostReduxForm);

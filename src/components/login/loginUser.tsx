@@ -1,11 +1,9 @@
 import { Field, reduxForm } from "redux-form";
 
 export const LoginUser = () => {
-  //выведем данные что получили из формы
   const onSubmit = (form:any) => {
     console.log(form);
   }
-  //Objectemail: "logim@pas"password: "1234587963"
 
   return (
     <div>

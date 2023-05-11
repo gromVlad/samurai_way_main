@@ -1,11 +1,8 @@
-//import { Message } from "../../data";
-
 //const
 const ADD_MESSAGE = "ADD_MESSAGE";
-const ADD_TEXT_MESSAGE = "ADD_TEXT_MESSAGE";
 
 
-export type ActionMessages = AddMESAction | AddTextMESAction;
+export type ActionMessages = AddMESAction 
 
 //type state
 export type Message = {
@@ -15,7 +12,6 @@ export type Message = {
 
 //init state
 export const initstateMes = {
-  textMessage: "hello",
   messages: [
     { mes: "Hello my name is Vlad" },
     { mes: "What.." },
@@ -32,24 +28,18 @@ export const reduserMessages = (
   action: ActionMessages
 ): InitStateType => {
   if (action.type === ADD_MESSAGE) {
-    return {...state,messages:[...state.messages,{mes:state.textMessage}],textMessage:""}
+    return {...state,messages:[...state.messages,{mes:action.newMes}]}
     
-  } else if (action.type === ADD_TEXT_MESSAGE) {
-    return {...state,textMessage:action.newMes}
-  }
-
+  } 
   return state;
 };
 
-export const addMesActCreator = () => ({ type: ADD_MESSAGE } as const);
 
-export const addTextMesActCreator = (text: string) => {
+export const addMesActCreator = (text: string) => {
   return {
-    type: ADD_TEXT_MESSAGE,
+    type: ADD_MESSAGE,
     newMes: text,
-  } as const
+  } as const;
 };
 
 type AddMESAction = ReturnType<typeof addMesActCreator>
-
-type AddTextMESAction =  ReturnType<typeof addTextMesActCreator>

@@ -6,8 +6,8 @@
   margin: 0 auto;
 }
 
-textarea {
-  width: 100%;
+.field {
+  min-width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -40,4 +40,8 @@ button:hover {
 
 .post:hover {
   transform: scale(1.05);
+}
+
+.form {
+  width: 100%;
 }

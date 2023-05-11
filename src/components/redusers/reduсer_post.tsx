@@ -1,4 +1,3 @@
-//import { DataMesAndLike } from "../../data";
 
 import { Dispatch } from "react";
 import { Action } from "redux";
@@ -6,7 +5,6 @@ import { userAPI } from "../dalAPI/apiAxios";
 
 //const
 const ADD_POST = "ADD_POST";
-const ADD_TEXT_POST = "ADD_TEXT_POST";
 const ADD_PROFILE = "ADD_PROFILE";
 const SET_STATUS = "ADD_STATUS";
 
@@ -40,7 +38,6 @@ export type ProfileType = {
 
 //init state
 export const initialStatePost = {
-  textPost: "hello",
   dataMesAndLike: [
     {
       mes: "hello world",
@@ -68,12 +65,9 @@ export const reduserPost = (
         ...state,
         dataMesAndLike: [
           ...state.dataMesAndLike,
-          { mes: state.textPost, like: 0 },
+          { mes: action.newText, like: 0 },
         ],
-        textPost: "",
       };
-    case ADD_TEXT_POST:
-      return { ...state, textPost: action.newText };
     case ADD_PROFILE:
       return { ...state, profile: action.profile };
     case SET_STATUS:
@@ -87,11 +81,10 @@ export const reduserPost = (
 };
 
 //action create
-export const addPostsActCreator = () => ({ type: ADD_POST } as const);
 
-export const addTextsActCreator = (text: string) => {
+export const addPostsActCreator = (text: string) => {
   return {
-    type: ADD_TEXT_POST,
+    type: ADD_POST,
     newText: text,
   } as const;
 };
@@ -112,13 +105,11 @@ export const setStatusCreator = (status: string) => {
 
 //action type
 type AddPostAction = ReturnType<typeof addPostsActCreator>;
-type AddTextPostAction = ReturnType<typeof addTextsActCreator>;
 type AddProfileAction = ReturnType<typeof addProfileCreator>;
 type SetStatusAction = ReturnType<typeof setStatusCreator>;
 
 export type ActionPost =
   | AddPostAction
-  | AddTextPostAction
   | AddProfileAction
   | SetStatusAction;
 
