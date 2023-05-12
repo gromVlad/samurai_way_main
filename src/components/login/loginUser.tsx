@@ -9,7 +9,7 @@ import { FormCustomInput } from "../UI/formInputCustom";
 const required = (value: string) => (value ? undefined : "Required");
 const maxLength = (max: number) => (value: string) =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
+const maxLength30 = maxLength(30);
 
 type LoginUserType = {
   loginOnPageThunk: (
@@ -47,7 +47,7 @@ export const LoginForm = (props: any) => {
           component={FormCustomInput}
           type="input"
           id="email"
-          validate={[required, maxLength15]}
+          validate={[required, maxLength30]}
         />
       </div>
       <div>
@@ -57,7 +57,7 @@ export const LoginForm = (props: any) => {
           component={FormCustomInput}
           type="input"
           id="password"
-          validate={[required, maxLength15]}
+          validate={[required, maxLength30]}
         />
       </div>
       <button type="submit">Log In</button>

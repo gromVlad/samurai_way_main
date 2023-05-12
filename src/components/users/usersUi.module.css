@@ -115,3 +115,7 @@ span:hover {
   background-color: #cccccc;
   color: #666666;
 }
+
+.boxSpan{
+  text-align: center;
+}

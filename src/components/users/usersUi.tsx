@@ -28,7 +28,8 @@ export const UserUI = (props: UserUIType) => {
 
   return (
     <>
-      {/* number page  */}
+    <div className={styles.boxSpan}>
+      {store.currentPage > 10 ? ". . .  " : " "}
       {newCountpage
         .slice(
           store.currentPage - 10 <= 0 ? 1 : store.currentPage - 5,
@@ -44,6 +45,7 @@ export const UserUI = (props: UserUIType) => {
           </span>
         ))}
       . . .
+      </div>
       <div className={styles["users-container"]}>
         {store.items.map((user) => (
           <div className={styles["user-card"]} key={user.id}>
