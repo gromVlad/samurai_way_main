@@ -58,8 +58,7 @@ export type AddisLoginAction = ReturnType<typeof isLoginCreator>;
 export type ActionPost = AddisLoginAction;
 
 //thunk
-export const loginCreatorThunk = () => {
-  return (dispatch: Dispatch<Action>) => {
+export const loginCreatorThunk = () => (dispatch: Dispatch<Action>) => {
     return userAPI.loginUser()
     .then(data => {
       if (data.resultCode === 0) {
@@ -67,7 +66,7 @@ export const loginCreatorThunk = () => {
       }
     })
   }
-}
+
 
 export const loginOnPageThunk = (
   email: string,

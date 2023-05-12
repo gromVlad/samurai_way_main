@@ -4,15 +4,14 @@ import { Action } from "redux";
 
 const INIT_LOG ="INIT_LOG"
 
-
 const initState ={
-  initBoolean:false as boolean
+  initBoolean:false 
 }
 
 type InitStateType = typeof initState
 
-export const reduserInitLog = (
-  state: InitStateType,
+export const reducerInitLog = (
+  state: InitStateType = initState,
   action: InitLogUser
 ): InitStateType => {
   switch (action.type) {
@@ -32,9 +31,8 @@ type InitLogUser = ReturnType<typeof initLogUser>
 //thunk
 export const initLogUserThunk = () => {
   return (dispatch: ThunkDispatch<DataPostType, void, Action>) => {
-    //создали чтобы показать
     let promise = dispatch(loginCreatorThunk());
-    //dispatch(someOtherThunk() и т.д.... / ожидаем получение promise взяли в [] если будет много / дальше если получили то вызываеться функция initLogUserThunk
+    //dispatch(someOtherThunk() и т.д.... / ожидаем получение promise взяли в [] если будет много / дальше если получили то вызываеться функция initLogUserThunk / пка не получили promise то будет initBoolean:false
     Promise.all([promise]).then(() => {
       dispatch(initLogUser());
     });
