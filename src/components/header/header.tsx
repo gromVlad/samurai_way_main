@@ -1,4 +1,3 @@
-import React from "react";
 import s from "./header.module.css";
 import { DataType } from "../redusers/reduсer_login";
 import { NavLink } from "react-router-dom";
