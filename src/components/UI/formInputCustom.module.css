@@ -15,7 +15,7 @@
 }
 
 .inputError {
-  border:3px solid #9c1c1c;
+  border:3px solid #dfee15;
 }
 
 .errorMessage {
@@ -23,7 +23,7 @@
   left: 0;
   bottom: -20px;
   font-size: 20px;
-  color: #9c1c1c;
+  color: #dfee15;;
   top:-40px
 }
 
