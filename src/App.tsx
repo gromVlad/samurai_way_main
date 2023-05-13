@@ -44,6 +44,7 @@ const App = (props: any) => {
       <ConnectContainerHeader />
       <ContainerNav />
       <div className="content">
+        <Route exact path="/" component={varibalsDialogs} />
         <Route path="/prof/:userID?" render={varibalsMainAPP} />
         <Route path="/dial" render={varibalsDialogs} />
         <Route path="/music/*" component={Music} />
