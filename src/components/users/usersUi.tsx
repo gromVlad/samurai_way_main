@@ -8,6 +8,7 @@ type UserUIType = {
   unfollowUsersThunk: (id: number) => void;
 };
 
+
 export const UserUI = (props: UserUIType) => {
   const { store, AddNewCurrentPage, followUsersThunk, unfollowUsersThunk } =
     props;
