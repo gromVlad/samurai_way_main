@@ -1,5 +1,6 @@
 Запустить проект:
 ### `yarn start`
+### "https://gromVlad.github.io/samurai_way_main"
 
 
 <hr>
