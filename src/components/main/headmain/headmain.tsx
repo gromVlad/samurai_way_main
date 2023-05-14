@@ -43,13 +43,16 @@ export function Headmain(props: HeadmainType) {
               />
             )}
             {isMyAccout && (
-              <input
-                className={styles.fileInput}
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={getNewPhoto}
-              />
+              <label className={styles.fileInputLabel}>
+                Change image
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={getNewPhoto}
+                  className={styles.fileInput}
+                />
+              </label>
             )}
           </div>
           <div className={styles.profileInfo}>
@@ -92,3 +95,4 @@ export function Headmain(props: HeadmainType) {
     </div>
   );
 }
+
