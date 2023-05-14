@@ -22,7 +22,11 @@ export const userAPI = {
   loginUser() {
     return instanceGetUser.get(`auth/me`).then((user) => user.data);
   },
-  loginUserOnPage(email:string, password:string, rememberMe:boolean = false) {
+  loginUserOnPage(
+    email: string,
+    password: string,
+    rememberMe: boolean = false
+  ) {
     return instance_Post_Delete
       .post(`auth/login`, { email, password, rememberMe })
       .then((user) => user.data);
@@ -49,6 +53,15 @@ export const userAPI = {
   updateStatus(status: string) {
     return instanceGetUser
       .put(`profile/status`, { status })
+      .then((res) => res.data);
+  },
+  updatePhoto(photo: File) {
+    const formData = new FormData();
+    //пишем image согласно инструкции сервера
+    formData.append("image", photo);
+    return instanceGetUser
+      .put(`profile/photo`, formData 
+      )
       .then((res) => res.data);
   },
 };

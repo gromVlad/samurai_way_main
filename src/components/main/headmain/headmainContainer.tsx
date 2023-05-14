@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Headmain } from "./headmain";
 import { StateType } from "../../redusers/redux-store";
-import { DataPostType, ProfileType, addProfileCreator, addProfileThunk, getStatusThunk, updateStatusThunk } from "../../redusers/reduсer_post";
+import { DataPostType, addProfileThunk, getStatusThunk, updatePhotoThunk, updateStatusThunk } from "../../redusers/reduсer_post";
 import { useParams } from "react-router-dom";
 
 type ContainerHeadmai = {
@@ -11,11 +11,20 @@ type ContainerHeadmai = {
   addProfileThunk: (userID: string) => void;
   getStatusThunk: (userID: string) => void;
   updateStatusThunk: (status: string) => void;
+  updatePhotoThunk: (photo: File) => void;
+  myId: null | number;
 };
 
 export const ContainerHeadmain = (props: ContainerHeadmai) => {
-  const { store, status, addProfileThunk, getStatusThunk, updateStatusThunk } =
-    props;
+  const {
+    store,
+    status,
+    addProfileThunk,
+    getStatusThunk,
+    updateStatusThunk,
+    updatePhotoThunk,
+    myId,
+  } = props;
   
   interface RouteParams {
     userID: string;
@@ -29,13 +38,15 @@ export const ContainerHeadmain = (props: ContainerHeadmai) => {
     getStatusThunk(userID);
   }, [userID]);
 
-
+  
   return (
     <>
       <Headmain
         store={store}
         status={status}
         updateStatusThunk={updateStatusThunk}
+        updatePhotoThunk={updatePhotoThunk}
+        {...(myId === +userID ? { isMyAccout: true } : { isMyAccout: false })}
       />
     </>
   );
@@ -43,18 +54,21 @@ export const ContainerHeadmain = (props: ContainerHeadmai) => {
 
 type mapStateToPropsType = {
   store: DataPostType;
-  status:null |string
+  status: null | string;
+  myId: null | number;
 };
 
 const mapStateToProps = (store: StateType): mapStateToPropsType => {
   return {
     store: store.dataPost,
-    status: store.dataPost.status
+    status: store.dataPost.status,
+    myId:store.login.data.id
   };
 };
 
 export const ConnectContainerHeadmain = connect(mapStateToProps, {
   addProfileThunk,
   getStatusThunk,
-  updateStatusThunk
+  updateStatusThunk,
+  updatePhotoThunk
 })(ContainerHeadmain);

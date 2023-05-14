@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import styles from "./headmain.module.css";
 import { DataPostType } from "../../redusers/reduсer_post";
 import { InputIsDone } from "../../inputIsDone.tsx/inputIsDone";
@@ -7,10 +7,20 @@ type HeadmainType = {
   store: DataPostType;
   status: null | string;
   updateStatusThunk: (status: string) => void;
+  updatePhotoThunk: (photo: File) => void;
+  isMyAccout:boolean
 };
 
 export function Headmain(props: HeadmainType) {
-  const { store, status, updateStatusThunk } = props;
+  const { store, status, updateStatusThunk, updatePhotoThunk, isMyAccout } =
+    props;
+
+  const getNewPhoto = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files){
+      updatePhotoThunk(e.target.files[0]);
+    }
+  };
+
   return (
     <div className={styles.container}>
       {!store.profile ? (
@@ -32,15 +42,30 @@ export function Headmain(props: HeadmainType) {
                 className={styles.profileImage}
               />
             )}
+            {isMyAccout && (
+              <input
+                className={styles.fileInput}
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={getNewPhoto}
+              />
+            )}
           </div>
           <div className={styles.profileInfo}>
             <h1 className={styles.profileName}>{store.profile.fullName}</h1>
             <p className={styles.profileAbout}>{store.profile.aboutMe}</p>
             <p className={styles.profileAbout}>
-              <InputIsDone
-                status={status ? status : "not  status"}
-                newStatus={updateStatusThunk}
-              />
+              {isMyAccout ? (
+                <InputIsDone
+                  status={status ? status : "not  status"}
+                  newStatus={updateStatusThunk}
+                />
+              ) : (
+                <p className={styles.profileAbout}>
+                  {status ? status : "not  status"}
+                </p>
+              )}
             </p>
             <ul className={styles.profileContacts}>
               {Object.entries(store.profile.contacts).map(([key, value]) => (

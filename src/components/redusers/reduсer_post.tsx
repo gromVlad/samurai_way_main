@@ -1,4 +1,3 @@
-
 import { Dispatch } from "react";
 import { Action } from "redux";
 import { userAPI } from "../dalAPI/apiAxios";
@@ -7,6 +6,7 @@ import { userAPI } from "../dalAPI/apiAxios";
 const ADD_POST = "ADD_POST";
 const ADD_PROFILE = "ADD_PROFILE";
 const SET_STATUS = "ADD_STATUS";
+const SET_PHOTO = "SET_PHOTO";
 
 //type init state
 type DataMesAndLike = {
@@ -75,6 +75,11 @@ export const reduserPost = (
         ...state,
         status: action.status,
       };
+    case SET_PHOTO:
+      return {
+        ...state,
+        profile: state.profile && { ...state.profile, photos: action.photo },
+      };
     default:
       return state;
   }
@@ -103,15 +108,27 @@ export const setStatusCreator = (status: string) => {
   } as const;
 };
 
+export const setPhotoCreator = (photo: {
+  small: string | null;
+  large: string | null;
+}) => {
+  return {
+    type: SET_PHOTO,
+    photo,
+  } as const;
+};
+
 //action type
 type AddPostAction = ReturnType<typeof addPostsActCreator>;
 type AddProfileAction = ReturnType<typeof addProfileCreator>;
 type SetStatusAction = ReturnType<typeof setStatusCreator>;
+type SetPhotoAction = ReturnType<typeof setPhotoCreator>;
 
 export type ActionPost =
   | AddPostAction
   | AddProfileAction
-  | SetStatusAction;
+  | SetStatusAction
+  | SetPhotoAction;
 
 //thunk
 export const addProfileThunk = (userID: string) => {
@@ -132,6 +149,16 @@ export const updateStatusThunk = (status: string) => {
   return (dispatch: Dispatch<Action>) => {
     userAPI.updateStatus(status).then((data) => {
       if (data.resultCode === 0) dispatch(setStatusCreator(status));
+    });
+  };
+};
+
+export const updatePhotoThunk = (photo: File) => {
+  return (dispatch: Dispatch<Action>) => {
+    userAPI.updatePhoto(photo).then((res) => {
+      if (res.resultCode === 0) {
+        dispatch(setPhotoCreator(res.data.photos));
+      }
     });
   };
 };
