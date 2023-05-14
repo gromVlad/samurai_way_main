@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ProfileType } from "../redusers/reduсer_post";
 
 const instanceGetUser = axios.create({
   baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -57,11 +58,13 @@ export const userAPI = {
   },
   updatePhoto(photo: File) {
     const formData = new FormData();
-    //пишем image согласно инструкции сервера
     formData.append("image", photo);
     return instanceGetUser
-      .put(`profile/photo`, formData 
-      )
+      .put(`profile/photo`, formData)
       .then((res) => res.data);
+  },
+  updateProfile(profile: any) {
+    return instance_Post_Delete
+      .put(`profile`, profile )
   },
 };

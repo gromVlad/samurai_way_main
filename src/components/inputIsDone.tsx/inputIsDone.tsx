@@ -1,12 +1,13 @@
 import { ChangeEvent, useState } from "react";
 
 type InputIsDoneType = {
-  status: string ;
-  newStatus: (newStatus:string) => void;
+  status: string;
+  newStatus: (newStatus: string) => void;
+  keyValue?: string;
 };
 
 export const InputIsDone = (props: InputIsDoneType) => {
-  const { status, newStatus } = props;
+  const { status, newStatus, keyValue } = props;
   let [isBoolean, setIsBoolean] = useState<boolean>(true);
   let [input, setInput] = useState<string>(status);
 
@@ -27,8 +28,8 @@ export const InputIsDone = (props: InputIsDoneType) => {
   return (
     <>
       {isBoolean ? (
-        <div  onDoubleClick={isChangeBoolean}>
-          {status}
+        <div onDoubleClick={isChangeBoolean}>
+          {keyValue ? keyValue : status}
         </div>
       ) : (
         <input

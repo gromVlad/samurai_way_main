@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import { Action } from "redux";
 import { userAPI } from "../dalAPI/apiAxios";
+import { ThunkDispatch } from "redux-thunk";
 
 //const
 const ADD_POST = "ADD_POST";
@@ -29,7 +30,7 @@ export type ProfileType = {
     website: string;
     youtube: string;
     mainLink: string;
-  };
+  },
   photos: {
     small: string | null;
     large: string | null;
@@ -160,5 +161,34 @@ export const updatePhotoThunk = (photo: File) => {
         dispatch(setPhotoCreator(res.data.photos));
       }
     });
+  };
+};
+
+type ContactsType = {
+  github: string;
+  vk: string;
+  facebook: string;
+  instagram: string;
+  twitter: string;
+  website: string;
+  youtube: string;
+  mainLink: string;
+};
+
+type ProfileStoreType = {
+  aboutMe: string;
+  userId: number;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  fullName: string;
+  contacts: ContactsType;
+};
+
+export const updateProfileThunk = (profile: ProfileStoreType, userID: string) => {
+  return async (dispatch: ThunkDispatch<DataPostType, void, Action>) => {
+    let res = await userAPI.updateProfile(profile);
+    if (res.data.resultCode === 0) {
+      dispatch(addProfileThunk(userID));
+    }
   };
 };

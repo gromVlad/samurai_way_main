@@ -4,6 +4,7 @@
   justify-content: center;
   width: 100%;
   margin-bottom: 20px;
+  padding: 0
 }
 
 /* Стили для заглушки */
@@ -91,6 +92,7 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  font-size: 1.0rem;
 }
 
 .profileContactItem {
@@ -110,13 +112,13 @@
 }
 
 .profileJob {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #000000;
   margin: 0 0 10px 0;
 }
 
 .profileJobTitle {
-  font-weight: 700;
+  /* font-weight: 700; */
    color: #000000;
 }
 
@@ -127,8 +129,9 @@
 }
 
 .profileJobDescTitle {
-  font-weight: 700;
+  /* font-weight: 600; */
   color: #000000;
+   font-size: 1.5rem;
 }
 
 /* Медиа-запросы для адаптивности */
@@ -171,7 +174,7 @@
   .profileJobTitle,
   .profileJobDescTitle,
   .profileContactLink {
-    font-size: 0.8rem;
+    font-size: 2rem;
   }
 
   .profileImage {
@@ -233,3 +236,4 @@
     padding: 8px 16px;
   }
 }
+

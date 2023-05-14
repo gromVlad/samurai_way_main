@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Headmain } from "./headmain";
 import { StateType } from "../../redusers/redux-store";
-import { DataPostType, addProfileThunk, getStatusThunk, updatePhotoThunk, updateStatusThunk } from "../../redusers/reduсer_post";
+import { DataPostType, ProfileType, addProfileThunk, getStatusThunk, updatePhotoThunk, updateProfileThunk, updateStatusThunk } from "../../redusers/reduсer_post";
 import { useParams } from "react-router-dom";
 
 type ContainerHeadmai = {
@@ -13,9 +13,11 @@ type ContainerHeadmai = {
   updateStatusThunk: (status: string) => void;
   updatePhotoThunk: (photo: File) => void;
   myId: null | number;
+  updateProfileThunk:(profile: any, userID: string) => void
 };
 
 export const ContainerHeadmain = (props: ContainerHeadmai) => {
+  
   const {
     store,
     status,
@@ -23,6 +25,7 @@ export const ContainerHeadmain = (props: ContainerHeadmai) => {
     getStatusThunk,
     updateStatusThunk,
     updatePhotoThunk,
+    updateProfileThunk,
     myId,
   } = props;
   
@@ -34,7 +37,7 @@ export const ContainerHeadmain = (props: ContainerHeadmai) => {
 
 
   useEffect(() => {
-    addProfileThunk(userID);
+    if (userID) addProfileThunk(userID);
     getStatusThunk(userID);
   }, [userID]);
 
@@ -46,7 +49,11 @@ export const ContainerHeadmain = (props: ContainerHeadmai) => {
         status={status}
         updateStatusThunk={updateStatusThunk}
         updatePhotoThunk={updatePhotoThunk}
-        {...(myId === +userID ? { isMyAccout: true } : { isMyAccout: false })}
+        updateProfileThunk={updateProfileThunk}
+        myId={myId +""}
+        {...(myId === store.profile?.userId
+          ? { isMyAccout: true }
+          : { isMyAccout: false })}
       />
     </>
   );
@@ -70,5 +77,6 @@ export const ConnectContainerHeadmain = connect(mapStateToProps, {
   addProfileThunk,
   getStatusThunk,
   updateStatusThunk,
-  updatePhotoThunk
+  updatePhotoThunk,
+  updateProfileThunk
 })(ContainerHeadmain);
