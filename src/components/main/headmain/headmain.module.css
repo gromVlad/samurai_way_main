@@ -4,7 +4,6 @@
   justify-content: center;
   width: 100%;
   margin-bottom: 20px;
-  padding: 0
 }
 
 /* Стили для заглушки */
@@ -18,8 +17,8 @@
 }
 
 .placeholderImage {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   margin-bottom: 20px;
 }
 
@@ -36,8 +35,9 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  max-width: 1200px;
-  padding: 20px;
+  max-width: 1000px;
+  margin: 20px;
+  padding: 15px;
   background-color: #cabe11;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -96,7 +96,7 @@
 }
 
 .profileContactItem {
-  flex: 1 0 50%;
+  flex: 1 0 35%;
   margin-bottom: 10px;
 }
 

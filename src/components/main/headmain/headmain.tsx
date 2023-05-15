@@ -135,37 +135,42 @@ export function Headmain(props: HeadmainType) {
             <ul className={styles.profileContacts}>
               {Object.entries(store.profile.contacts).map(([key, value]) => (
                 <li key={key} className={styles.profileContactItem}>
-                  {isMyAccout ? (
-                    <InputIsDone
-                      keyValue={key}
-                      status={value}
-                      newStatus={(valueNew) =>
-                        updateProfileThunk(
-                          {
-                            ...ProfileStore,
-                            contacts: {
-                              ...ProfileStore.contacts,
-                              [key]: valueNew,
+                  <div style={{ display: "inline-block" }}>
+                    {isMyAccout ? (
+                      <InputIsDone
+                        keyValue={key}
+                        status={value}
+                        newStatus={(valueNew) =>
+                          updateProfileThunk(
+                            {
+                              ...ProfileStore,
+                              contacts: {
+                                ...ProfileStore.contacts,
+                                [key]: valueNew,
+                              },
                             },
-                          },
-                          myId
-                        )
-                      }
-                    />
-                  ) : (
-                    <p>{key}</p>
-                  )}
+                            myId
+                          )
+                        }
+                      />
+                    ) : (
+                      <p style={{ display: "inline-block", margin: 0 }}>
+                        {key}
+                      </p>
+                    )}
+                  </div>
                   <a
                     href={value}
                     target="_blank"
                     className={styles.profileContactLink}
+                    style={{ display: "inline-block", marginLeft: "8px" }}
                   >
-                    +
+                    link 
                   </a>
                 </li>
               ))}
             </ul>
-
+            
             {/* profile Job */}
             <div className={styles.profileJob}>
               <p>
@@ -214,3 +219,4 @@ export function Headmain(props: HeadmainType) {
     </div>
   );
 }
+

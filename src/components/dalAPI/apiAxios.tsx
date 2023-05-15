@@ -26,10 +26,11 @@ export const userAPI = {
   loginUserOnPage(
     email: string,
     password: string,
-    rememberMe: boolean = false
+    rememberMe: boolean = false,
+    captcha:null | string = null
   ) {
     return instance_Post_Delete
-      .post(`auth/login`, { email, password, rememberMe })
+      .post(`auth/login`, { email, password, rememberMe, captcha })
       .then((user) => user.data);
   },
   logoutUserOnPage() {
@@ -64,7 +65,9 @@ export const userAPI = {
       .then((res) => res.data);
   },
   updateProfile(profile: any) {
-    return instance_Post_Delete
-      .put(`profile`, profile )
+    return instance_Post_Delete.put(`profile`, profile);
+  },
+  getCaptchUser() {
+    return instance_Post_Delete.put(`security/get-captcha-url`);
   },
 };

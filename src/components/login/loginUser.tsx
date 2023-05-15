@@ -1,4 +1,4 @@
-import { Field, reduxForm } from "redux-form";
+import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import { loginOnPageThunk } from "../redusers/reduсer_login";
 import { connect } from "react-redux";
 import { StateType } from "../redusers/redux-store";
@@ -15,31 +15,51 @@ type LoginUserType = {
   loginOnPageThunk: (
     email: string,
     password: string,
-    rememberMe: boolean
+    rememberMe: boolean,
+    captcha: null | string
   ) => void;
-  resultCode:number
+  resultCode: number;
+  captch: null | string;
 };
 
 export const LoginUser = (props: LoginUserType) => {
+  const { loginOnPageThunk, resultCode, captch } =props
 
-  if (props.resultCode === 0){
+  if (resultCode === 0){
     return <Redirect to={"/dial"} />
   }
 
   const onSubmitHandler = (values:any) => {
-    props.loginOnPageThunk(values.email, values.password,false);
+    console.log(values);
+    loginOnPageThunk(values.email, values.password, false, values.captch);
   };
 
   return (
     <div>
-      <LoginRormRedux onSubmit={onSubmitHandler} />
+      <LoginRormRedux
+        onSubmit={onSubmitHandler}
+        captchaUrl={captch}
+        resultCode={resultCode}
+      />
     </div>
   );
 };
 
-export const LoginForm = (props: any) => {
+type PropsLoginForm = {
+  captchaUrl: null | string;
+  resultCode:number
+};
+
+export const LoginForm = ({
+  handleSubmit,
+  captchaUrl,
+  error,
+  resultCode
+}: PropsLoginForm & InjectedFormProps<FormData , PropsLoginForm>) => {
+  console.log(captchaUrl,"res",resultCode);
+  
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="email">Email</label>
         <Field
@@ -61,21 +81,30 @@ export const LoginForm = (props: any) => {
         />
       </div>
       <button type="submit">Log In</button>
-      {props.error && <p>{props.error}</p>}
+      <div>{captchaUrl && <img src={captchaUrl} />}</div>
+       <div>{captchaUrl && (
+        <Field
+          name="captch"
+          component={FormCustomInput}
+          type="input"
+          id="captch"
+          validate={[required, maxLength30]}
+        />
+      )}</div>
+      {error && <p>{error}</p>}
     </form>
   );
 };
 
-const LoginRormRedux = reduxForm({
-  //name form
+const LoginRormRedux = reduxForm<FormData, PropsLoginForm>({
   form: "login",
 })(LoginForm);
 
 const mapToProps =(store:StateType) => {
   return {
-    resultCode:store.login.resultCode
+    resultCode:store.login.resultCode,
+    captch: store.login.captch
   }
 }
 
-
-export const ContainerLoginUser = connect(mapToProps, { loginOnPageThunk })(LoginUser);
+export const ContainerLoginUser = connect(mapToProps, { loginOnPageThunk, })(LoginUser);
