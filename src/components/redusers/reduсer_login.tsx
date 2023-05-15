@@ -144,3 +144,17 @@ export const getCaptchThunk = () => {
     dispatch(getCaptchCreator(resultCaptch.data.url));
   };
 };
+
+export const logoutOnPageThunk2 = () => {
+  return (dispatch: Dispatch<Action>) => {
+    try {
+      userAPI.logoutUserOnPage().then((data) => {
+        if (data.resultCode === 0) {
+          dispatch(isLoginCreator(nullLogin, 1));
+        }
+      });
+    } catch (error) {
+      console.error("Ошибка при выполнении запроса:", error);
+    }
+  };
+};
