@@ -4,6 +4,7 @@ import { StateType } from "../redusers/redux-store";
 import { addMesActCreator} from "../redusers/reduсer.messages";
 import { Dialogs } from "./dialogs";
 import { connect } from "react-redux";
+import React from "react";
 
 const mapStateToProps = (state:StateType) => {
   return {
@@ -19,7 +20,7 @@ const mapDispatchToProps = (dispatch:(action: any) => void) => {
   };
 };
 
-export const DialogsContainer = compose(connect(
+export const DialogsContainer = compose<React.ComponentType>(connect(
   mapStateToProps,
   mapDispatchToProps
 ),IsAuthLogin)(Dialogs);

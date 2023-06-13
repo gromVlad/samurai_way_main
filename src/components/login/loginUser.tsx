@@ -56,7 +56,6 @@ export const LoginForm = ({
   error,
   resultCode
 }: PropsLoginForm & InjectedFormProps<FormData , PropsLoginForm>) => {
-  console.log(captchaUrl,"res",resultCode);
   
   return (
     <form onSubmit={handleSubmit}>
