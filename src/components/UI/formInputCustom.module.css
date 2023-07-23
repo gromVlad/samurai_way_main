@@ -4,6 +4,8 @@
 }
 
 .input {
+  position: relative;
+  z-index: 2;
   width: 50%;
   height: 40px;
   padding: 10px;
@@ -23,8 +25,9 @@
   left: 0;
   bottom: -20px;
   font-size: 20px;
-  color: #dfee15;;
-  top:-40px
+  color: #dfee15;
+  top:-40px;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Headmain } from "./headmain";
 import { StateType } from "../../redusers/redux-store";
-import { DataPostType, ProfileType, addProfileThunk, getStatusThunk, updatePhotoThunk, updateProfileThunk, updateStatusThunk } from "../../redusers/reduсer_post";
+import { DataPostType,  addProfileThunk, getStatusThunk, updatePhotoThunk, updateProfileThunk, updateStatusThunk } from "../../redusers/reduсer_post";
 import { useParams } from "react-router-dom";
 
 type ContainerHeadmai = {
@@ -35,10 +35,9 @@ export const ContainerHeadmain = (props: ContainerHeadmai) => {
 
   let { userID } = useParams<RouteParams>();
 
-
   useEffect(() => {
-    if (userID) addProfileThunk(userID);
-    getStatusThunk(userID);
+    if (userID) {addProfileThunk(userID);
+    getStatusThunk(userID)};
   }, [userID]);
 
   

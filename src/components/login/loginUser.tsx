@@ -11,6 +11,10 @@ const maxLength = (max: number) => (value: string) =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
 const maxLength30 = maxLength(30);
 
+const minLength = (min: number) => (value: string) =>
+  value && value.length < min ? `Password must be at least ${min} characters` : undefined;
+const minLength4 = minLength(4);
+
 type LoginUserType = {
   loginOnPageThunk: (
     email: string,
@@ -74,9 +78,9 @@ export const LoginForm = ({
         <Field
           name="password"
           component={FormCustomInput}
-          type="input"
+          type="password"
           id="password"
-          validate={[required, maxLength30]}
+          validate={[required, minLength4]}
         />
       </div>
       <button type="submit">Log In</button>
@@ -85,9 +89,9 @@ export const LoginForm = ({
         <Field
           name="captch"
           component={FormCustomInput}
-          type="input"
+          type="password"
           id="captch"
-          validate={[required, maxLength30]}
+          validate={[required, minLength4]}
         />
       )}</div>
       {error && <p>{error}</p>}

@@ -133,17 +133,6 @@ export const actionIsProgressFollow = (isProgressFollow: boolean,id:number) => {
   } as const;
 };
 
-//old oproach type add in action type before () : 
-//export const actionIsProgressFollow = (isProgressFollow: boolean,id:number):TypeАctionIsProgressFollow => {
-// . . .
-// type TypeАctionIsProgressFollow = {
-//   type: typeof PROGRESS_FOLLOW;
-//   payload: {
-//     isProgressFollow:boolean,
-//     id:number
-//   };
-// };
-
 type ActionFollowFalseType = ReturnType<typeof actionFollowFalse>;
 type ActionFollowTrueType = ReturnType<typeof actionFollowTrue>;
 type ActionAddStateType = ReturnType<typeof actionAddState>;

@@ -5,7 +5,7 @@ import s from "./music.module.css";
 export function Music() {
   return (
     <main >
-        Music
+        <h1>work</h1>
     </main>
   );
 }

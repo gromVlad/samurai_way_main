@@ -1,31 +1,44 @@
+import { useState } from "react";
 import s from "./formInputCustom.module.css";
 
 type FormCustomInputProps = {
   input: any;
   meta: any;
   placeholder: string;
-  type: "input" | "textarea";
-};
+  type: "input" | "textarea" | "password"; // добавим тип password
+}
 
-export const FormCustomInput = ({
+export const FormCustomInput: React.FC<FormCustomInputProps> = ({
   input,
   meta: { touched, error },
   placeholder,
-  type,
-}: FormCustomInputProps) => {
-  const Element = type === "input" ? "input" : "textarea";
-  const hasError = touched && error;
-  const style = type === "textarea" ? { width: "100%" } : undefined;
-  
+  type
+}) => {
+
+  const [showPassword, setShowPassword] = useState(false); // флаг для пароля
+
+  const togglePassword = () => {
+    setShowPassword(prev => !prev);
+  }
+
+  const inputType = showPassword ? 'text' : type; // для пароля type меняем
+
   return (
-    <div className={`${s.container} ${hasError ? s.error : ""}`}>
-      <Element
+    <div className={s.container}>
+
+      <input
         {...input}
         placeholder={placeholder}
-        className={`${s.input} ${hasError ? s.inputError : ""}`}
-        style={style}
+        type={inputType}
+        className={`${s.input} ${touched && error ? s.inputError : ''}`} 
       />
-      {hasError && <div className={s.errorMessage}>{error}</div>}
+
+      {/* кнопка для пароля */}
+
+      {touched && error && (
+        <div className={s.errorMessage}>{error}</div>
+      )}
+
     </div>
-  );
-};
+  )
+}

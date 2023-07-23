@@ -1,4 +1,4 @@
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, reset } from "redux-form";
 import { StateType } from "../../redusers/redux-store";
 import s from "./newPost.module.css";
 import { Post } from "./post/post";
@@ -15,12 +15,12 @@ type NewPostType = {
 };
 
 export function NewPost(props: NewPostType) {
-  const arrdataMesAndLike = props.store.dataPost.dataMesAndLike.map((el) => (
-    <Post message={el.mes} like={el.like} />
+  const arrdataMesAndLike = props.store.dataPost.dataMesAndLike.map((el,index) => (
+    <Post key={index} message={el.mes} like={el.like} />
   ));
 
 
-  const addPost = (values: any) => {
+  const addPost = (values: any) => {;
     props.addPost(values.textMessagePost);
   };
 
@@ -53,4 +53,6 @@ const PostReduxForm = (props: any) => {
     </form>
   );
 };
-const PostForm = reduxForm({ form: "PostForm" })(PostReduxForm);
+const PostForm = reduxForm({
+  form: "PostForm", destroyOnUnmount: false,
+  onSubmitSuccess: (result, dispatch) => dispatch(reset('PostForm') )})(PostReduxForm);

@@ -119,16 +119,14 @@ export function Headmain(props: HeadmainType) {
 
             {/* status */}
             <p className={styles.profileAbout}>
-              {isMyAccout ? (
-                <InputIsDone
-                  status={status ? status : "not  status"}
-                  newStatus={updateStatusThunk}
-                />
-              ) : (
-                <p className={styles.profileAbout}>
-                  {status ? status : "not  status"}
-                </p>
-              )}
+                {isMyAccout ? (
+                  <InputIsDone
+                    status={status ? status : "not  status"}
+                    newStatus={updateStatusThunk}
+                  />
+                ) : (
+                  status ? status : "not  status"
+                )}
             </p>
 
             {/* contacts */}

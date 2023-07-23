@@ -24,6 +24,7 @@ button {
   color: #fff;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  margin-bottom: 10px;
 }
 
 button:hover {

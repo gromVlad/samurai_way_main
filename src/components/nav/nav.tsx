@@ -10,7 +10,7 @@ type NavigationAPPType = {
 
 export function NavigationAPP(props: NavigationAPPType) {
 
-  const friends = props.store.sidebar.map((el:any) => <p>{el} </p>)
+  const friends = props.store.sidebar.map((el: any) => <p key={el}>{el} </p>)
 
   return (
     <nav className={s.nav}>
