@@ -85,7 +85,7 @@ export function Headmain(props: HeadmainType) {
           {/* fullName */}
           <div className={styles.profileInfo}>
             {isMyAccout ? (
-              <h1 className={styles.profileName}>
+              <div className={styles.profileName}>
                 <InputIsDone
                   status={store.profile.fullName}
                   newStatus={(value) =>
@@ -95,14 +95,14 @@ export function Headmain(props: HeadmainType) {
                     )
                   }
                 />
-              </h1>
+              </div>
             ) : (
               <h1 className={styles.profileName}>{store.profile.fullName}</h1>
             )}
 
             {/* aboutMe */}
             {isMyAccout ? (
-              <p className={styles.profileAbout}>
+              <div className={styles.profileAbout}>
                 <InputIsDone
                   status={store.profile.aboutMe}
                   newStatus={(value) =>
@@ -112,13 +112,13 @@ export function Headmain(props: HeadmainType) {
                     )
                   }
                 />
-              </p>
+              </div>
             ) : (
               <p className={styles.profileAbout}>{store.profile.aboutMe}</p>
             )}
 
             {/* status */}
-            <p className={styles.profileAbout}>
+            <div className={styles.profileAbout}>
                 {isMyAccout ? (
                   <InputIsDone
                     status={status ? status : "not  status"}
@@ -127,7 +127,7 @@ export function Headmain(props: HeadmainType) {
                 ) : (
                   status ? status : "not  status"
                 )}
-            </p>
+            </div>
 
             {/* contacts */}
             <ul className={styles.profileContacts}>
@@ -171,7 +171,7 @@ export function Headmain(props: HeadmainType) {
             
             {/* profile Job */}
             <div className={styles.profileJob}>
-              <p>
+              <div>
                 {isMyAccout ? (
                   <ToggleSwitch
                     label={"Looking for a job:"}
@@ -187,12 +187,12 @@ export function Headmain(props: HeadmainType) {
                   "Looking for a job: "
                 )}
                 {store.profile.lookingForAJob ? "Yes" : "No"}
-              </p>
+              </div>
             </div>
 
             {/*looking For A Job*/}
             {store.profile.lookingForAJob && (
-              <p className={styles.profileJobDescTitle}>
+              <div className={styles.profileJobDescTitle}>
                 Job description :
                 {isMyAccout ? (
                   <div className={styles.profileJobTitle}>
@@ -209,7 +209,7 @@ export function Headmain(props: HeadmainType) {
                 ) : (
                   store.profile.lookingForAJobDescription
                 )}
-              </p>
+              </div>
             )}
           </div>
         </div>

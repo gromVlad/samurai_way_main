@@ -47,8 +47,8 @@ const App = (props: any) => {
         <Route exact path="/" component={varibalsDialogs} />
         <Route path="/prof/:userID?" render={varibalsMainAPP} />
         <Route path="/dial" render={varibalsDialogs} />
-        <Route path="/music/*" component={Music} />
-        <Route path="/news/*" component={News} />
+        <Route path="/music/" component={Music} />
+        <Route path="/news/" component={News} />
         <Route path="/user" render={varibalsContainer} />
         <Route path="/login" component={ContainerLoginUser} />
       </div>
