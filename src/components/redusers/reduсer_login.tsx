@@ -8,6 +8,12 @@ const ADD_LOGIN = "ADD_LOGIN";
 const GET_CAPTCH = "GET_CAPTCH";
 const NULL_CAPTCH = "NULL_CAPTCH";
 
+export const TypeResulCode = {
+  success:0,
+  error:1,
+  captcha:10
+}
+
 export type DataType = {
   id: null | number;
   email: null | string
@@ -21,9 +27,10 @@ export const initialStateLogin = {
     email: null,
     login: null,
   } as DataType,
-  resultCode: 1,
+  resultCode: TypeResulCode.success,
   captch: null as null | string
 };
+
 
 export type DataPostType = typeof initialStateLogin;
 
@@ -90,7 +97,7 @@ export type ActionPost = AddisLoginAction | GetCaptchAction | NullCaptchhAction
 export const loginCreatorThunk = () => (dispatch: Dispatch<Action>) => {
     return userAPI.loginUser()
     .then(data => {
-      if (data.resultCode === 0) {
+      if (data.resultCode === TypeResulCode.success) {
         dispatch(isLoginCreator(data.data, data.resultCode));
       }
     })
@@ -107,11 +114,11 @@ export const loginOnPageThunk = (
     userAPI
       .loginUserOnPage(email, password, rememberMe, captcha)
       .then((data) => {
-        if (data.resultCode === 0) {
+        if (data.resultCode === TypeResulCode.success) {
           dispatch(loginCreatorThunk());
           dispatch(nullCaptchCreator());
         } else {
-          if (data.resultCode === 10) {
+          if (data.resultCode === TypeResulCode.captcha) {
             dispatch(getCaptchThunk());
           }
           let messageError =
@@ -131,7 +138,7 @@ const nullLogin = {
 export const logoutOnPageThunk = () => {
   return (dispatch: Dispatch<Action>) => {
     userAPI.logoutUserOnPage().then((data) => {
-      if (data.resultCode === 0) {
+      if (data.resultCode === TypeResulCode.success) {
         dispatch(isLoginCreator(nullLogin, 1));
       }
     });
@@ -149,7 +156,7 @@ export const logoutOnPageThunk2 = () => {
   return (dispatch: Dispatch<Action>) => {
     try {
       userAPI.logoutUserOnPage().then((data) => {
-        if (data.resultCode === 0) {
+        if (data.resultCode === TypeResulCode.success) {
           dispatch(isLoginCreator(nullLogin, 1));
         }
       });

@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 import { Action } from "redux";
 import { userAPI } from "../dalAPI/apiAxios";
 import { ThunkDispatch } from "redux-thunk";
+import { TypeResulCode } from "./reduсer_login";
 
 //const
 const ADD_POST = "ADD_POST";
@@ -149,7 +150,7 @@ export const getStatusThunk = (userID: string) => {
 export const updateStatusThunk = (status: string) => {
   return (dispatch: Dispatch<Action>) => {
     userAPI.updateStatus(status).then((data) => {
-      if (data.resultCode === 0) dispatch(setStatusCreator(status));
+      if (data.resultCode === TypeResulCode.success) dispatch(setStatusCreator(status));
     });
   };
 };
@@ -157,7 +158,7 @@ export const updateStatusThunk = (status: string) => {
 export const updatePhotoThunk = (photo: File) => {
   return (dispatch: Dispatch<Action>) => {
     userAPI.updatePhoto(photo).then((res) => {
-      if (res.resultCode === 0) {
+      if (res.resultCode === TypeResulCode.success) {
         dispatch(setPhotoCreator(res.data.photos));
       }
     });
@@ -187,7 +188,7 @@ type ProfileStoreType = {
 export const updateProfileThunk = (profile: ProfileStoreType, userID: string) => {
   return async (dispatch: ThunkDispatch<DataPostType, void, Action>) => {
     let res = await userAPI.updateProfile(profile);
-    if (res.data.resultCode === 0) {
+    if (res.data.resultCode === TypeResulCode.success) {
       dispatch(addProfileThunk(userID));
     }
   };

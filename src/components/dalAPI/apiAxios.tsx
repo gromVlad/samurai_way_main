@@ -14,6 +14,16 @@ const instance_Post_Delete = axios.create({
   },
 });
 
+type meResponseType = {
+  resultCode: number;
+  messages: string[];
+  data: {
+    id: number;
+    email: string;
+    login: string;
+  };
+};
+
 export const userAPI = {
   getUsers(currentPage: number, pageNumber: number) {
     return instanceGetUser
@@ -27,7 +37,7 @@ export const userAPI = {
     email: string,
     password: string,
     rememberMe: boolean = false,
-    captcha:null | string = null
+    captcha: null | string = null
   ) {
     return instance_Post_Delete
       .post(`auth/login`, { email, password, rememberMe, captcha })

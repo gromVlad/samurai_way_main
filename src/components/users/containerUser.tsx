@@ -10,7 +10,6 @@ import {
 import { StateType } from "../redusers/redux-store";
 import { useEffect } from "react";
 import { Preloader } from "../preloader/preloader";
-import { compose } from "redux";
 
 export type AllTypeConnectUser = MapStateToPropsType & MapDispatchToPropsType;
 
@@ -43,7 +42,7 @@ const UsePreContainerUI = (props: AllTypeConnectUser) => {
   //first load on page
   useEffect(() => {
     firstLoadUsersThunk(store.currentPage, store.pageNumber);
-  }, []);
+  }, [firstLoadUsersThunk, store.currentPage, store.pageNumber]);
 
   //fun add new current page
   const AddNewCurrentPage = (page: number) => {

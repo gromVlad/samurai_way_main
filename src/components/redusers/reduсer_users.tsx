@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
-import { Action } from "redux";
 import { userAPI } from "../dalAPI/apiAxios";
+import { TypeResulCode } from "./reduсer_login";
 
 const FOLLOW_FALSE = "FOLLOW_FALSE";
 const FOLLOW_TRUE = "FOLLOW_TRUE";
@@ -150,7 +150,7 @@ type ActionUsers =
 
 //thunk
 export const firstLoadUsersThunk = (currentPage:number, pageNumber:number) => {
-  return (dispatch: Dispatch<Action>) => {
+  return (dispatch: Dispatch<ActionUsers>) => {
     dispatch(actionIsFetching(true));
     userAPI.getUsers(currentPage, pageNumber).then((data) => {
       dispatch(actionIsFetching(false));
@@ -160,7 +160,7 @@ export const firstLoadUsersThunk = (currentPage:number, pageNumber:number) => {
 };
 
 export const nextLoadUsersThunk = (page:number,pageNumber:number) => {
-  return (dispatch: Dispatch<Action>) => {
+  return (dispatch: Dispatch<ActionUsers>) => {
     dispatch(addCurrentPage(page));
     dispatch(actionIsFetching(true));
     userAPI.getUsers(page,pageNumber).then((data) => {
@@ -171,10 +171,10 @@ export const nextLoadUsersThunk = (page:number,pageNumber:number) => {
 };
 
 export const followUsersThunk = (id:number) => {
-  return (dispatch: Dispatch<Action>) => {
+  return (dispatch: Dispatch<ActionUsers>) => {
      dispatch(actionIsProgressFollow(true, id));
      userAPI.addfollow(id).then((data) => {
-       if (data.resultCode === 0) {
+       if (data.resultCode === TypeResulCode.success) {
          dispatch(actionFollowTrue(id));
        }
        dispatch(actionIsProgressFollow(false, id));
@@ -183,10 +183,10 @@ export const followUsersThunk = (id:number) => {
 };
 
 export const unfollowUsersThunk = (id:number) => {
-  return (dispatch: Dispatch<Action>) => {
+  return (dispatch: Dispatch<ActionUsers>) => {
      dispatch(actionIsProgressFollow(true, id));
      userAPI.deleteUser(id).then((data) => {
-       if (data.resultCode === 0) {
+       if (data.resultCode === TypeResulCode.success) {
          dispatch(actionFollowFalse(id));
        }
        dispatch(actionIsProgressFollow(false, id));
