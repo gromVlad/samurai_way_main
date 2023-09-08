@@ -12,7 +12,7 @@ export const TypeResulCode = {
   success:0,
   error:1,
   captcha:10
-}
+} as const
 
 export type DataType = {
   id: null | number;
@@ -27,7 +27,7 @@ export const initialStateLogin = {
     email: null,
     login: null,
   } as DataType,
-  resultCode: TypeResulCode.success,
+  resultCode: +TypeResulCode.success,
   captch: null as null | string
 };
 

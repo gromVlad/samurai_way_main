@@ -1,5 +1,4 @@
 import axios from "axios";
-import { ProfileType } from "../redusers/reduсer_post";
 
 const instanceGetUser = axios.create({
   baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -14,7 +13,7 @@ const instance_Post_Delete = axios.create({
   },
 });
 
-type meResponseType = {
+type MeResponseType = {
   resultCode: number;
   messages: string[];
   data: {
@@ -31,7 +30,7 @@ export const userAPI = {
       .then((user) => user.data);
   },
   loginUser() {
-    return instanceGetUser.get(`auth/me`).then((user) => user.data);
+    return instanceGetUser.get<MeResponseType>(`auth/me`).then((user) => user.data);
   },
   loginUserOnPage(
     email: string,
